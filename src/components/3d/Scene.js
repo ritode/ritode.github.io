@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState, version } from "react";
 import { MathUtils, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF, Text3D } from "@react-three/drei";
+import { useGLTF, Text3D, CameraControls } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
+import { useSceneStore } from "../store/sceneStore";
+import MyCameraControls from "./myCameraControls";
 
 const objects = {
   cat: {
@@ -43,7 +45,7 @@ const objects = {
   },
   planet5: {
     key: "p5",
-    position: new Vector3(-5, -3, -1),
+    position: new Vector3(-5, 2, -1),
     scale: {
       mobile: new Vector3(1, 1, 1).multiplyScalar(2.1),
       desktop: new Vector3(1, 1, 1).multiplyScalar(2),
@@ -51,13 +53,15 @@ const objects = {
   },
 };
 export default function Scene() {
+  const { cameraController } = useSceneStore();
+
   const cat = useGLTF("models/cat-ghost.glb");
 
   const p1 = useGLTF("models/about-me.glb");
   const p2 = useGLTF("models/purple_planet.glb");
   const p3 = useGLTF("models/stylized_planet.glb");
   const p4 = useGLTF("models/waterworld.glb");
-  const p5 = useGLTF("models/lowilds_planet.glb");
+  const p5 = useGLTF("models/astplan.glb");
 
   const catRef = useRef(null);
   const p1ref = useRef(null);
@@ -65,6 +69,24 @@ export default function Scene() {
   const p3ref = useRef(null);
   const p4ref = useRef(null);
   const p5ref = useRef(null);
+
+  const [cameraControlRef, setCameraControlRef] = useState(null);
+  const [cameraProps, setCameraProps] = useState({
+    makeDefault: true,
+    autoRotate: true,
+    autoRotateSpeed: 0.2,
+    minPolarAngle: Math.PI / 2 - 0.1,
+    maxPolarAngle: Math.PI / 2 + 0.4,
+    maxDistance: 5,
+    minDistance: 1,
+    target: [0, 1, 0],
+    distance: 4,
+    draggingSmoothTime: 0.5,
+    boundaryEnclosesCamera: true,
+    azimuthRotateSpeed: -1.3,
+    polarRotateSpeed: -1.3,
+  });
+  const [zoomOut, setZoomOut] = useState(false);
 
   const [p1Loaded, setP1Loaded] = useState(false);
   const [p2Loaded, setP2Loaded] = useState(false);
@@ -122,8 +144,40 @@ export default function Scene() {
     p4ref.current,
     p5ref.current,
   ]);
+  function handlePlanetClick(planet) {
+    cameraControlRef.current?.setTarget(...objects[planet].position, true);
+    cameraControlRef.current?.dollyTo(4, true);
+    const ob = { ...cameraProps };
+    ob.minPolarAngle = 0;
+    ob.maxPolarAngle = 2 * Math.PI;
+    ob.azimuthRotateSpeed = 1.3;
+    ob.polarRotateSpeed = 1.3;
+    setCameraProps(ob);
+  }
+  useFrame(() => {
+    if (cameraControlRef?.current?.distance > 4.5) setZoomOut(true);
+    else setZoomOut(false);
+  });
+  useEffect(() => {
+    if (zoomOut) {
+      cameraControlRef.current?.setTarget(0, 1, 0, true);
+      cameraControlRef.current?.moveTo(0, 0, 0, true);
+      const ob = { ...cameraProps };
+      ob.minPolarAngle = Math.PI / 2 - 0.1;
+      ob.maxPolarAngle = Math.PI / 2 + 0.4;
+      ob.azimuthRotateSpeed = -1.3;
+      ob.polarRotateSpeed = -1.3;
+      setCameraProps(ob);
+      cameraControlRef.current?.rotateTo(
+        cameraControlRef.current.azimuthAngle,
+        1.5,
+        true
+      );
+    }
+  }, [zoomOut]);
   return (
     <>
+      <MyCameraControls setRef={setCameraControlRef} props={cameraProps} />
       <primitive
         key={objects.cat.key}
         object={cat.scene}
@@ -142,6 +196,7 @@ export default function Scene() {
         }
         castShadow
         ref={p1ref}
+        onClick={() => handlePlanetClick("planet1")}
       />
       {p1Loaded && (
         <Text3D
@@ -184,6 +239,7 @@ export default function Scene() {
         }
         castShadow
         ref={p2ref}
+        onClick={() => handlePlanetClick("planet2")}
       />
       {p2Loaded && (
         <Text3D
@@ -219,6 +275,7 @@ export default function Scene() {
             : objects.planet3.scale.desktop
         }
         ref={p3ref}
+        onClick={() => handlePlanetClick("planet3")}
       />
       {p3Loaded && (
         <Text3D
@@ -254,6 +311,7 @@ export default function Scene() {
         }
         castShadow
         ref={p4ref}
+        onClick={() => handlePlanetClick("planet4")}
       />
       <primitive
         key={"p5"}
@@ -266,6 +324,7 @@ export default function Scene() {
         }
         castShadow
         ref={p5ref}
+        onClick={() => handlePlanetClick("planet5")}
       />
       {p5Loaded && (
         <Text3D
@@ -281,7 +340,7 @@ export default function Scene() {
           scale={[1, 1, 0.5]}
           position={[
             p5ref.current.position.x,
-            p5ref.current.position.y + 3.8,
+            p5ref.current.position.y - 2,
             p5ref.current.position.z,
           ]}
           rotation={[0, 1.5, 0]}

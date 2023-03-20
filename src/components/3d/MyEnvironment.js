@@ -1,8 +1,15 @@
 import { Environment, Sparkles, CameraControls } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useEffect, useRef } from "react";
 import { isDesktop } from "react-device-detect";
+import { useSceneStore } from "../store/sceneStore";
 
 export default function MyEnvironment() {
+  const cameraControlRef = useRef(null);
+  const { setCameraController } = useSceneStore();
+  useEffect(() => {
+    setCameraController(cameraControlRef);
+  }, [cameraControlRef]);
   return (
     <>
       {/* <ambientLight intensity={0.5} /> */}
@@ -16,21 +23,6 @@ export default function MyEnvironment() {
         <Sparkles count={200} scale={[20, 20, 10]} size={2} speed={2} />
       )}
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
-      <CameraControls
-        makeDefault
-        autoRotate
-        autoRotateSpeed={0.2}
-        minPolarAngle={Math.PI / 2 - 0.1}
-        maxPolarAngle={Math.PI / 2 + 0.4}
-        maxDistance={4.5}
-        minDistance={1}
-        target={[0, 1, 0]}
-        distance={4}
-        draggingSmoothTime={0.5}
-        boundaryEnclosesCamera
-        azimuthRotateSpeed={-1.3}
-        polarRotateSpeed={-1.3}
-      />
     </>
   );
 }
