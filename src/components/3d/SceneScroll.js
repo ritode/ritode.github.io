@@ -62,7 +62,7 @@ export default function SceneScroll() {
     <>
       <Center rotation={[0, 0, 0]} position={[0, 0.5, 0]}>
         <Text3D
-          font="./Inter_Bold.json"
+          font="./fonts/Inter_Bold.json"
           curveSegments={32}
           bevelEnabled
           bevelSize={0.01}
