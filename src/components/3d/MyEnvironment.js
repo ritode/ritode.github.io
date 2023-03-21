@@ -20,7 +20,7 @@ export default function MyEnvironment() {
       <hemisphereLight intensity={0.2} color="#eaeaea" groundColor="blue" />
       {/* <directionalLight castShadow intensity={0.2} shadow-mapSize={[1024, 1024]} shadow-bias={-0.0001} position={[10, 10, -10]} /> */}
       {isDesktop && (
-        <Sparkles count={200} scale={[20, 20, 10]} size={2} speed={2} />
+        <Sparkles count={200} scale={[20, 20, 10]} size={1} speed={2} />
       )}
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
     </>

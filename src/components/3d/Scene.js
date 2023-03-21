@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, version } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MathUtils, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF, Text3D, CameraControls } from "@react-three/drei";
+import { useGLTF, Text3D, Center } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
 import { useSceneStore } from "../store/sceneStore";
 import MyCameraControls from "./myCameraControls";
@@ -96,38 +96,48 @@ export default function Scene() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    catRef.current.rotation.x = MathUtils.lerp(
-      catRef.current.rotation.x,
-      Math.cos(t / 10) / 20,
-      0.1
-    );
-    catRef.current.rotation.y = MathUtils.lerp(
-      catRef.current.rotation.y,
-      Math.sin(t / 10) / 4,
-      0.1
-    );
-    catRef.current.rotation.z = MathUtils.lerp(
-      catRef.current.rotation.z,
-      Math.sin(t / 10) / 10,
-      0.1
-    );
-    catRef.current.position.y = MathUtils.lerp(
-      catRef.current.position.y,
-      -Math.sin(t / 4) / 5 - 1,
-      0.1
-    );
+    if (catRef.current) {
+      catRef.current.rotation.x = MathUtils.lerp(
+        catRef.current.rotation.x,
+        Math.cos(t / 10) / 20,
+        0.1
+      );
+      catRef.current.rotation.y = MathUtils.lerp(
+        catRef.current.rotation.y,
+        Math.sin(t / 10) / 4,
+        0.1
+      );
+      catRef.current.rotation.z = MathUtils.lerp(
+        catRef.current.rotation.z,
+        Math.sin(t / 10) / 10,
+        0.1
+      );
+      catRef.current.position.y = MathUtils.lerp(
+        catRef.current.position.y,
+        -Math.sin(t / 4) / 5 - 1,
+        0.1
+      );
+    }
   });
 
   useFrame((state) => {
-    p1ref.current.rotation.y += 0.005;
-    p1ref.current.rotation.z += 0.001;
-    p2ref.current.children[0].children[0].children[0].rotation.x -= 0.002;
-    p2ref.current.children[0].children[0].children[1].rotation.z += 0.005;
-    p3ref.current.children[0].children[0].children[0].children[0].rotation.y += 0.001;
-    p3ref.current.children[0].children[0].children[0].children[1].rotation.y -= 0.005;
-    p4ref.current.rotation.y += 0.005;
-    p5ref.current.children[0].children[0].children[0].children[0].children[0].children[0].rotation.y += 0.005;
-    p5ref.current.children[0].children[0].children[0].children[0].children[0].children[1].rotation.y -= 0.005;
+    if (p1Loaded) {
+      p1ref.current.rotation.y += 0.005;
+      p1ref.current.rotation.z += 0.001;
+    }
+    if (p2Loaded) {
+      p2ref.current.children[0].children[0].children[0].rotation.x -= 0.002;
+      p2ref.current.children[0].children[0].children[1].rotation.z += 0.005;
+    }
+    if (p3Loaded) {
+      p3ref.current.children[0].children[0].children[0].children[0].rotation.y += 0.001;
+      p3ref.current.children[0].children[0].children[0].children[1].rotation.y -= 0.005;
+    }
+    if (p4Loaded) p4ref.current.rotation.y += 0.005;
+    if (p5Loaded) {
+      p5ref.current.children[0].children[0].children[0].children[0].children[0].children[0].rotation.y += 0.005;
+      p5ref.current.children[0].children[0].children[0].children[0].children[0].children[1].rotation.y -= 0.005;
+    }
   });
 
   useEffect(() => {
@@ -136,7 +146,6 @@ export default function Scene() {
     if (p3ref.current) setP3Loaded(true);
     if (p4ref.current) setP4Loaded(true);
     if (p5ref.current) setP5Loaded(true);
-    console.log("rito");
   }, [
     p1ref.current,
     p2ref.current,
@@ -213,14 +222,14 @@ export default function Scene() {
           position={
             isMobile
               ? [
-                  p1ref.current.position.x - 0.5,
-                  p1ref.current.position.y + 1.2,
-                  p1ref.current.position.z,
+                  p1ref?.current?.position.x - 0.5,
+                  p1ref?.current?.position.y + 1.2,
+                  p1ref?.current?.position.z,
                 ]
               : [
-                  p1ref.current.position.x + 1,
-                  p1ref.current.position.y + 0.5,
-                  p1ref.current.position.z,
+                  p1ref?.current?.position.x + 1,
+                  p1ref?.current?.position.y + 0.5,
+                  p1ref?.current?.position.z,
                 ]
           }
         >
@@ -254,9 +263,9 @@ export default function Scene() {
           size={0.3}
           scale={[1, 1, 0.5]}
           position={[
-            p2ref.current.position.x,
-            p2ref.current.position.y - 1.5,
-            p2ref.current.position.z,
+            p2ref?.current?.position.x,
+            p2ref?.current?.position.y - 1.5,
+            p2ref?.current?.position.z,
           ]}
           rotation={[0, -1.3, 0]}
         >
@@ -290,9 +299,9 @@ export default function Scene() {
           size={0.3}
           scale={[1, 1, 0.5]}
           position={[
-            p3ref.current.position.x,
-            p3ref.current.position.y - 1.7,
-            p3ref.current.position.z,
+            p3ref?.current?.position.x,
+            p3ref?.current?.position.y - 1.7,
+            p3ref?.current?.position.z,
           ]}
           rotation={[0, -2.2, 0]}
         >
@@ -339,9 +348,9 @@ export default function Scene() {
           size={0.3}
           scale={[1, 1, 0.5]}
           position={[
-            p5ref.current.position.x,
-            p5ref.current.position.y - 2,
-            p5ref.current.position.z,
+            p5ref?.current?.position.x,
+            p5ref?.current?.position.y - 2,
+            p5ref?.current?.position.z,
           ]}
           rotation={[0, 1.5, 0]}
         >
