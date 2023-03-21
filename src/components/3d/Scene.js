@@ -8,6 +8,7 @@ import MyCameraControls from "./myCameraControls";
 import LandingPage from "./LandingPage";
 import { OBJECTS } from "../constants/objects";
 import { Environment } from "@react-three/drei";
+import DisplayPage from "../2d/DisplayPage";
 
 export default function Scene() {
   const { cameraController } = useSceneStore();
@@ -90,6 +91,23 @@ export default function Scene() {
     ob.azimuthRotateSpeed = 1.3;
     ob.polarRotateSpeed = 1.3;
     setCameraProps(ob);
+    switch (planet) {
+      case "planet1":
+        window.history.replaceState(null, null, "/planet1");
+        break;
+      case "planet2":
+        window.history.replaceState(null, null, "/planet2");
+        break;
+      case "planet3":
+        window.history.replaceState(null, null, "/planet3");
+        break;
+      case "planet4":
+        window.history.replaceState(null, null, "/planet4");
+        break;
+      case "planet5":
+        window.history.replaceState(null, null, "/planet5");
+        break;
+    }
   }
   useFrame(() => {
     if (cameraControlRef?.current?.distance > 4.5) setZoomOut(true);
@@ -110,6 +128,7 @@ export default function Scene() {
         1.5,
         true
       );
+      window.history.replaceState(null, null, "/");
     }
   }, [zoomOut]);
   return (
@@ -117,6 +136,7 @@ export default function Scene() {
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
       <MyCameraControls setRef={setCameraControlRef} props={cameraProps} />
       <LandingPage />
+      <DisplayPage />
       <primitive
         key={OBJECTS.planet1.key}
         object={p1.scene}

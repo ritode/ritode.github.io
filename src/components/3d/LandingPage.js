@@ -6,11 +6,6 @@ import { EffectComposer, Glitch } from "@react-three/postprocessing";
 
 export default function LandingPage() {
   const { progress } = useProgress();
-  const mesh = useRef(null);
-  useFrame(() => {
-    if (mesh.current) mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-  });
-
   return (
     <>
       {!(progress == 100) && (

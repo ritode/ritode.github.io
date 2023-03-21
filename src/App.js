@@ -6,6 +6,7 @@ import SceneScroll from "./components/3d/SceneScroll";
 import MyEnvironment from "./components/3d/MyEnvironment";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense } from "react";
+import DisplayPage from "./components/2d/DisplayPage";
 
 function App() {
   return (

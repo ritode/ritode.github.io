@@ -4,7 +4,7 @@ import { MathUtils } from "three";
 import { useRef } from "react";
 import { OBJECTS } from "../constants/objects";
 export default function CatPlayer() {
-  const cat = useGLTF("models/cat-ghost1.glb");
+  const cat = useGLTF("models/cat-ghost.glb");
   const catRef = useRef(null);
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
