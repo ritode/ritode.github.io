@@ -5,57 +5,12 @@ import { useGLTF, Text3D, Center } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
 import { useSceneStore } from "../store/sceneStore";
 import MyCameraControls from "./myCameraControls";
+import LandingPage from "./LandingPage";
+import { OBJECTS } from "../constants/objects";
+import { Environment } from "@react-three/drei";
 
-const objects = {
-  cat: {
-    key: "cat",
-    position: new Vector3(0, -1, 0),
-  },
-  planet1: {
-    key: "p1",
-    position: new Vector3(0, 1.5, -5),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(0.023),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(0.02),
-    },
-  },
-  planet2: {
-    key: "p2",
-    position: new Vector3(5.5, 2, -2),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(1.2),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(1),
-    },
-  },
-  planet3: {
-    key: "p3",
-    position: new Vector3(5, 2, 3.5),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(1.5),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(1.3),
-    },
-  },
-  planet4: {
-    key: "p4",
-    position: new Vector3(-2, 1.5, 5),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(1.2),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(1),
-    },
-  },
-  planet5: {
-    key: "p5",
-    position: new Vector3(-5, 2, -1),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(2.1),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(2),
-    },
-  },
-};
 export default function Scene() {
   const { cameraController } = useSceneStore();
-
-  const cat = useGLTF("models/cat-ghost.glb");
 
   const p1 = useGLTF("models/about-me.glb");
   const p2 = useGLTF("models/purple_planet.glb");
@@ -63,7 +18,6 @@ export default function Scene() {
   const p4 = useGLTF("models/waterworld.glb");
   const p5 = useGLTF("models/astplan.glb");
 
-  const catRef = useRef(null);
   const p1ref = useRef(null);
   const p2ref = useRef(null);
   const p3ref = useRef(null);
@@ -93,32 +47,6 @@ export default function Scene() {
   const [p3Loaded, setP3Loaded] = useState(false);
   const [p4Loaded, setP4Loaded] = useState(false);
   const [p5Loaded, setP5Loaded] = useState(false);
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (catRef.current) {
-      catRef.current.rotation.x = MathUtils.lerp(
-        catRef.current.rotation.x,
-        Math.cos(t / 10) / 20,
-        0.1
-      );
-      catRef.current.rotation.y = MathUtils.lerp(
-        catRef.current.rotation.y,
-        Math.sin(t / 10) / 4,
-        0.1
-      );
-      catRef.current.rotation.z = MathUtils.lerp(
-        catRef.current.rotation.z,
-        Math.sin(t / 10) / 10,
-        0.1
-      );
-      catRef.current.position.y = MathUtils.lerp(
-        catRef.current.position.y,
-        -Math.sin(t / 4) / 5 - 1,
-        0.1
-      );
-    }
-  });
 
   useFrame((state) => {
     if (p1Loaded) {
@@ -154,7 +82,7 @@ export default function Scene() {
     p5ref.current,
   ]);
   function handlePlanetClick(planet) {
-    cameraControlRef.current?.setTarget(...objects[planet].position, true);
+    cameraControlRef.current?.setTarget(...OBJECTS[planet].position, true);
     cameraControlRef.current?.dollyTo(4, true);
     const ob = { ...cameraProps };
     ob.minPolarAngle = 0;
@@ -186,22 +114,17 @@ export default function Scene() {
   }, [zoomOut]);
   return (
     <>
+      <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
       <MyCameraControls setRef={setCameraControlRef} props={cameraProps} />
+      <LandingPage />
       <primitive
-        key={objects.cat.key}
-        object={cat.scene}
-        position={objects.cat.position}
-        ref={catRef}
-        castShadow
-      />
-      <primitive
-        key={objects.planet1.key}
+        key={OBJECTS.planet1.key}
         object={p1.scene}
-        position={objects.planet1.position}
+        position={OBJECTS.planet1.position}
         scale={
           isMobile
-            ? objects.planet1.scale.mobile
-            : objects.planet1.scale.desktop
+            ? OBJECTS.planet1.scale.mobile
+            : OBJECTS.planet1.scale.desktop
         }
         castShadow
         ref={p1ref}
@@ -238,13 +161,13 @@ export default function Scene() {
         </Text3D>
       )}
       <primitive
-        key={objects.planet2.key}
+        key={OBJECTS.planet2.key}
         object={p2.scene}
-        position={objects.planet2.position}
+        position={OBJECTS.planet2.position}
         scale={
           isMobile
-            ? objects.planet2.scale.mobile
-            : objects.planet2.scale.desktop
+            ? OBJECTS.planet2.scale.mobile
+            : OBJECTS.planet2.scale.desktop
         }
         castShadow
         ref={p2ref}
@@ -276,12 +199,12 @@ export default function Scene() {
       <primitive
         key={"p3"}
         object={p3.scene}
-        position={objects.planet3.position}
+        position={OBJECTS.planet3.position}
         castShadow
         scale={
           isMobile
-            ? objects.planet3.scale.mobile
-            : objects.planet3.scale.desktop
+            ? OBJECTS.planet3.scale.mobile
+            : OBJECTS.planet3.scale.desktop
         }
         ref={p3ref}
         onClick={() => handlePlanetClick("planet3")}
@@ -312,11 +235,11 @@ export default function Scene() {
       <primitive
         key={"p4"}
         object={p4.scene}
-        position={objects.planet4.position}
+        position={OBJECTS.planet4.position}
         scale={
           isMobile
-            ? objects.planet4.scale.mobile
-            : objects.planet4.scale.desktop
+            ? OBJECTS.planet4.scale.mobile
+            : OBJECTS.planet4.scale.desktop
         }
         castShadow
         ref={p4ref}
@@ -325,11 +248,11 @@ export default function Scene() {
       <primitive
         key={"p5"}
         object={p5.scene}
-        position={objects.planet5.position}
+        position={OBJECTS.planet5.position}
         scale={
           isMobile
-            ? objects.planet5.scale.mobile
-            : objects.planet5.scale.desktop
+            ? OBJECTS.planet5.scale.mobile
+            : OBJECTS.planet5.scale.desktop
         }
         castShadow
         ref={p5ref}

@@ -1,4 +1,4 @@
-import { Environment, Sparkles, CameraControls } from "@react-three/drei";
+import { Sparkles } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { useEffect, useRef } from "react";
 import { isDesktop } from "react-device-detect";
@@ -22,7 +22,6 @@ export default function MyEnvironment() {
       {isDesktop && (
         <Sparkles count={200} scale={[20, 20, 10]} size={1} speed={2} />
       )}
-      <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
     </>
   );
 }
