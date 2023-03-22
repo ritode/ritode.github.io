@@ -1,21 +1,29 @@
+.html-ob {
+  transform: translate(-50%, -50%) !important;
+}
 .screen {
-  margin-top: -200px;
-  width: 700px;
-  margin-left: -350px;
 }
 .overlay {
+  width: 700px;
+  height: 200px;
   background-color: rgba(226, 139, 255, 0.602);
   border-radius: 6px;
   padding: 20px 0;
   margin: 20px 0;
 }
 .hint {
-  background-color: rgba(139, 230, 255, 0.602);
-  border-radius: 60px;
+  display: flex;
+  flex-flow: column;
+  background-color: rgba(124, 124, 124, 0.602);
+  text-shadow: 2px black;
+  border-radius: 16px;
   padding: 10px 0;
-  margin: 300px 0;
   width: 500px;
-  margin-left: 110px;
+}
+.hint p {
+  margin: auto;
+  line-height: 4;
+  font-size: 18px;
 }
 @media only screen and (max-width: 600px) {
   .screen {

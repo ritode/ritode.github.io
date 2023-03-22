@@ -84,13 +84,6 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
         ref={pref}
         onClick={() => handlePlanetClick()}
       />
-      {selected && (
-        <Hint
-          cameraControlRef={cameraControlRef}
-          type="Zoom"
-          position={OBJECTS[name].position}
-        />
-      )}
       {!selected && (
         <Text3D
           font="./fonts/Inter_Bold.json"

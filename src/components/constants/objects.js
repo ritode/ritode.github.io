@@ -73,7 +73,7 @@ export const CAMERA_PROPS = {
   minPolarAngle: Math.PI / 2 - 0.1,
   maxPolarAngle: Math.PI / 2 + 0.4,
   maxDistance: 4.5,
-  minDistance: 1,
+  minDistance: 2.3,
   target: [0, 1, 0],
   distance: 4.5,
   draggingSmoothTime: 0.5,

@@ -23,7 +23,8 @@ export default function MyCameraControls({ props, setRef }) {
       boundaryEnclosesCamera
       azimuthRotateSpeed={props.azimuthRotateSpeed}
       polarRotateSpeed={props.polarRotateSpeed}
-      smoothTime={0.5}
+      smoothTime={1}
+      restThreshold={0.12}
       ref={ref}
     />
   );

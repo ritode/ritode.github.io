@@ -1,23 +1,23 @@
-import { useEffect, useRef, useState } from "react";
-import { MathUtils, Vector3 } from "three";
-import { useFrame } from "@react-three/fiber";
-import { useGLTF, Text3D, Center } from "@react-three/drei";
-import { isMobile } from "react-device-detect";
-import { useSceneStore } from "../store/sceneStore";
+import { useEffect, useState } from "react";
 import MyCameraControls from "./myCameraControls";
 import LandingPage from "./LandingPage";
-import { OBJECTS, CAMERA_PROPS } from "../constants/objects";
+import { CAMERA_PROPS } from "../constants/objects";
 import { Environment } from "@react-three/drei";
 import DisplayPage from "../2d/DisplayPage";
 import Planet from "./Planet";
 import Hint from "./Hints";
+import { OBJECTS } from "../constants/objects";
 
 export default function Scene() {
-  const { cameraController } = useSceneStore();
-
   const [cameraControlRef, setCameraControlRef] = useState(null);
   const [cameraProps, setCameraProps] = useState(CAMERA_PROPS);
   const [planetSelected, setPlanetSelected] = useState("");
+  const [showDragHint, setShowDragHint] = useState(true);
+  const [showZoomHint, setShowZoomHint] = useState(false);
+
+  useEffect(() => {
+    if (!showDragHint) setShowZoomHint(true);
+  }, [showDragHint]);
 
   useEffect(() => {
     if (!planetSelected) {
@@ -38,6 +38,7 @@ export default function Scene() {
       cameraControlRef?.current?.dollyTo(4.5, true);
       window.history.replaceState(null, null, "/");
     } else {
+      console.log(planetSelected);
       const ob = { ...CAMERA_PROPS };
       ob.minPolarAngle = 0;
       ob.maxPolarAngle = 2 * Math.PI;
@@ -53,8 +54,22 @@ export default function Scene() {
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
       <MyCameraControls setRef={setCameraControlRef} props={cameraProps} />
       <LandingPage />
-      <DisplayPage />
-      <Hint cameraControlRef={cameraControlRef} type="Drag" />
+      {!showZoomHint && <DisplayPage />}
+      {showDragHint && (
+        <Hint
+          cameraControlRef={cameraControlRef}
+          type="Drag"
+          setActive={setShowDragHint}
+        />
+      )}
+      {showZoomHint && planetSelected && (
+        <Hint
+          cameraControlRef={cameraControlRef}
+          type="Zoom"
+          position={OBJECTS[planetSelected].position}
+          setActive={setShowZoomHint}
+        />
+      )}
       <Planet
         name="planet1"
         cameraControlRef={cameraControlRef}
