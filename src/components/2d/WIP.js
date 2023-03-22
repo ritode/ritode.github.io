@@ -5,7 +5,11 @@ export default function WIP() {
   const path = window.location.href.split("/")[3];
   return (
     <Html position={OBJECTS[path].position}>
-      <h1>W I P</h1>
+      <div className="screen">
+        <div className="overlay">
+          <h1>W I P</h1>
+        </div>
+      </div>
     </Html>
   );
 }

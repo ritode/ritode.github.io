@@ -15,10 +15,10 @@ export default function MyCameraControls({ props, setRef }) {
       autoRotateSpeed={0.2}
       minPolarAngle={props.minPolarAngle}
       maxPolarAngle={props.maxPolarAngle}
-      maxDistance={5}
-      minDistance={1}
+      maxDistance={props.maxDistance}
+      minDistance={props.minDistance}
       target={[0, 1, 0]}
-      distance={4}
+      distance={props.distance}
       draggingSmoothTime={0.5}
       boundaryEnclosesCamera
       azimuthRotateSpeed={props.azimuthRotateSpeed}

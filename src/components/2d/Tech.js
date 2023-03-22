@@ -5,7 +5,11 @@ export default function Tech() {
   const path = window.location.href.split("/")[3];
   return (
     <Html position={OBJECTS[path].position}>
-      <h1>Tech</h1>
+      <div className="screen">
+        <div className="overlay">
+          <h1>Tech</h1>
+        </div>
+      </div>
     </Html>
   );
 }
