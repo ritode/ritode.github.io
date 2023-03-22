@@ -10,6 +10,7 @@ import { OBJECTS, CAMERA_PROPS } from "../constants/objects";
 import { Environment } from "@react-three/drei";
 import DisplayPage from "../2d/DisplayPage";
 import Planet from "./Planet";
+import Hint from "./Hints";
 
 export default function Scene() {
   const { cameraController } = useSceneStore();
@@ -34,6 +35,7 @@ export default function Scene() {
         1.5,
         true
       );
+      cameraControlRef?.current?.dollyTo(4.5, true);
       window.history.replaceState(null, null, "/");
     } else {
       const ob = { ...CAMERA_PROPS };
@@ -52,6 +54,7 @@ export default function Scene() {
       <MyCameraControls setRef={setCameraControlRef} props={cameraProps} />
       <LandingPage />
       <DisplayPage />
+      <Hint cameraControlRef={cameraControlRef} type="Drag" />
       <Planet
         name="planet1"
         cameraControlRef={cameraControlRef}

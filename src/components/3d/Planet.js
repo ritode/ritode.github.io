@@ -3,11 +3,25 @@ import { isMobile } from "react-device-detect";
 import { useGLTF, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState, useEffect } from "react";
+import Hint from "./Hints";
 export default function Planet({ name, cameraControlRef, setPlanet }) {
   const p = useGLTF(OBJECTS[name].model);
   const pref = useRef(null);
   const [selected, setSelected] = useState(false);
   const [textPosition, setTextPosition] = useState(null);
+
+  useEffect(() => {
+    window.addEventListener("dblclick", () => {
+      setPlanet("");
+      setSelected(false);
+    });
+    return () => {
+      window.removeEventListener("dblclick", () => {
+        setPlanet("");
+        setSelected(false);
+      });
+    };
+  });
 
   useEffect(() => {
     let p = [
@@ -70,6 +84,13 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
         ref={pref}
         onClick={() => handlePlanetClick()}
       />
+      {selected && (
+        <Hint
+          cameraControlRef={cameraControlRef}
+          type="Zoom"
+          position={OBJECTS[name].position}
+        />
+      )}
       {!selected && (
         <Text3D
           font="./fonts/Inter_Bold.json"

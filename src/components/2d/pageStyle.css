@@ -4,10 +4,18 @@
   margin-left: -350px;
 }
 .overlay {
-  background-color: rgba(255, 139, 139, 0.602);
+  background-color: rgba(226, 139, 255, 0.602);
   border-radius: 6px;
   padding: 20px 0;
   margin: 20px 0;
+}
+.hint {
+  background-color: rgba(139, 230, 255, 0.602);
+  border-radius: 60px;
+  padding: 10px 0;
+  margin: 300px 0;
+  width: 500px;
+  margin-left: 110px;
 }
 @media only screen and (max-width: 600px) {
   .screen {
@@ -17,5 +25,9 @@
   .screen p {
     word-wrap: break-word !important;
     white-space: initial;
+  }
+  .hint {
+    margin: 220px 0;
+    width: 300px;
   }
 }

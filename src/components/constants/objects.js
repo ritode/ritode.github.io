@@ -81,3 +81,13 @@ export const CAMERA_PROPS = {
   azimuthRotateSpeed: -1.3,
   polarRotateSpeed: -1.3,
 };
+export const HINTS = {
+  Drag: {
+    Desktop: "Left click and drag mouse left to interact",
+    Mobile: "Swipe left to interact",
+  },
+  Zoom: {
+    Desktop: "Double Click/ Zoom out to go back",
+    Mobile: "Double Click/ Zoom out to go back",
+  },
+};

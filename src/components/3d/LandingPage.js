@@ -1,14 +1,20 @@
 import CatPlayer from "./CatPlayer";
 import { useProgress, Html, Center } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { EffectComposer, Glitch } from "@react-three/postprocessing";
 
 export default function LandingPage() {
   const { progress } = useProgress();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (progress == 100) setLoading(false);
+  }, [progress]);
+
   return (
     <>
-      {!(progress == 100) && (
+      {loading && (
         <>
           <EffectComposer>
             <Glitch
