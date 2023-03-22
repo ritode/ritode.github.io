@@ -83,8 +83,8 @@ export const CAMERA_PROPS = {
 };
 export const HINTS = {
   Drag: {
-    Desktop: "Left click and drag mouse left to interact",
-    Mobile: "Swipe left to interact",
+    Desktop: "Click and drag to interact",
+    Mobile: "Swipe to interact",
   },
   Zoom: {
     Desktop: "Double Click/ Zoom out to go back",
