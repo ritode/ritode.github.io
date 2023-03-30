@@ -1,15 +1,7 @@
 import { Sparkles } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
-import { useEffect, useRef } from "react";
 import { isDesktop } from "react-device-detect";
-import { useSceneStore } from "../store/sceneStore";
 
 export default function MyEnvironment() {
-  const cameraControlRef = useRef(null);
-  const { setCameraController } = useSceneStore();
-  useEffect(() => {
-    setCameraController(cameraControlRef);
-  }, [cameraControlRef]);
   return (
     <>
       {/* <ambientLight intensity={0.5} /> */}

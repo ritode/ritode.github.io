@@ -14,7 +14,6 @@ export default function Scene() {
   const [planetSelected, setPlanetSelected] = useState("");
   const [showDragHint, setShowDragHint] = useState(true);
   const [showZoomHint, setShowZoomHint] = useState(false);
-
   useEffect(() => {
     if (!showDragHint) setShowZoomHint(true);
   }, [showDragHint]);
@@ -24,26 +23,26 @@ export default function Scene() {
       cameraControlRef?.current?.setTarget(0, 1, 0, true);
       cameraControlRef?.current?.moveTo(0, 0, 0, true);
       const ob = { ...cameraProps };
-      ob.minPolarAngle = Math.PI / 2 - 0.1;
-      ob.maxPolarAngle = Math.PI / 2 + 0.4;
-      ob.azimuthRotateSpeed = -1.3;
-      ob.polarRotateSpeed = -1.3;
-      ob.maxDistance = 4.5;
+      ob.minPolarAngle = CAMERA_PROPS.minPolarAngle;
+      ob.maxPolarAngle = CAMERA_PROPS.maxPolarAngle;
+      ob.azimuthRotateSpeed = CAMERA_PROPS.azimuthRotateSpeed;
+      ob.polarRotateSpeed = CAMERA_PROPS.polarRotateSpeed;
+      ob.maxDistance = CAMERA_PROPS.maxDistance;
       setCameraProps(ob);
-      cameraControlRef?.current?.rotateTo(
-        cameraControlRef?.current.azimuthAngle,
-        1.5,
-        true
-      );
+      // cameraControlRef?.current?.rotateTo(
+      //   cameraControlRef?.current.azimuthAngle,
+      //   1.5,
+      //   true
+      // );
       cameraControlRef?.current?.dollyTo(4.5, true);
       window.history.replaceState(null, null, "/");
     } else {
       console.log(planetSelected);
-      const ob = { ...CAMERA_PROPS };
+      const ob = { ...cameraProps };
       ob.minPolarAngle = 0;
       ob.maxPolarAngle = 2 * Math.PI;
-      ob.azimuthRotateSpeed = 1.3;
-      ob.polarRotateSpeed = 1.3;
+      ob.azimuthRotateSpeed = -1 * CAMERA_PROPS.azimuthRotateSpeed;
+      ob.polarRotateSpeed = -1 * CAMERA_PROPS.polarRotateSpeed;
       ob.maxDistance = 4.6;
       setCameraProps(ob);
     }

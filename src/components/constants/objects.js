@@ -8,7 +8,7 @@ export const OBJECTS = {
     key: "p1",
     model: "models/about-me.glb",
     text: "Me",
-    textPositionOffset: new Vector3(-0.55, -0.25, 1.5),
+    textPositionOffset: new Vector3(-0.5, 0, 1.5),
     textRotationOffset: [0, 0, 0],
     position: new Vector3(0, 1.5, -5),
     scale: {
@@ -87,7 +87,7 @@ export const HINTS = {
     Mobile: "Swipe to interact",
   },
   Zoom: {
-    Desktop: "Double Click/ Zoom out to go back",
-    Mobile: "Double Click/ Zoom out to go back",
+    Desktop: "Double Click to go back",
+    Mobile: "Double Click to go back",
   },
 };

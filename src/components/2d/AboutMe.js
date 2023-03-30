@@ -8,11 +8,8 @@ export default function AboutMe() {
   return (
     <Html position={OBJECTS[path].position} className="html-ob">
       <div className="overlay">
+        <h1>About Me</h1> <h1>About Me</h1> <h1>About Me</h1> <h1>About Me</h1>{" "}
         <h1>About Me</h1>
-        <p>
-          Hi, I am Ritobrita De. <br />
-          Currently I am working as a front end developer.
-        </p>
       </div>
     </Html>
   );

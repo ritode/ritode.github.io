@@ -1,7 +1,6 @@
 import CatPlayer from "./CatPlayer";
 import { useProgress, Html, Center } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { EffectComposer, Glitch } from "@react-three/postprocessing";
 
 export default function LandingPage() {

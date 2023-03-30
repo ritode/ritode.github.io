@@ -1,7 +1,10 @@
 .html-ob {
   transform: translate(-50%, -50%) !important;
-}
-.screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .overlay {
   width: 700px;

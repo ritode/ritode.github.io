@@ -30,26 +30,14 @@ export default function Hint({
   });
 
   async function dragCameraAnimation() {
-    if (type === "Drag") {
-      await cameraControlRef?.current.rotateTo(
-        getRandomArbitrary(0, 2 * Math.PI),
-        getRandomArbitrary(
-          CAMERA_PROPS.minPolarAngle,
-          CAMERA_PROPS.maxPolarAngle
-        ),
-        true
-      );
-    } else if (type === "Zoom") {
-      {
-        await cameraControlRef?.current.dollyTo(
-          getRandomArbitrary(
-            CAMERA_PROPS.minDistance,
-            CAMERA_PROPS.maxDistance
-          ),
-          true
-        );
-      }
-    }
+    await cameraControlRef?.current.rotateTo(
+      getRandomArbitrary(0, 2 * Math.PI),
+      getRandomArbitrary(
+        CAMERA_PROPS.minPolarAngle,
+        CAMERA_PROPS.maxPolarAngle
+      ),
+      true
+    );
     settransition(false);
   }
 

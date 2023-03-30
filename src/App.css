@@ -1,5 +1,24 @@
 .App {
   text-align: center;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
 }
 
 .App-logo {
@@ -7,6 +26,27 @@
   pointer-events: none;
 }
 
+section {
+  max-width: 600px;
+  width: 100%;
+  height: 600px;
+  overflow: scroll;
+  margin: 0 auto;
+  padding: 60px 15px;
+  transition: transform 0.25s;
+  will-change: transform;
+}
+
+section div {
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6vw;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     -webkit-animation: App-logo-spin infinite 20s linear;
