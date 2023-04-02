@@ -30,37 +30,23 @@ export default function Hint({
   });
 
   async function dragCameraAnimation() {
-    if (type === "Drag") {
-      await cameraControlRef?.current.rotateTo(
-        getRandomArbitrary(0, 2 * Math.PI),
-        getRandomArbitrary(
-          CAMERA_PROPS.minPolarAngle,
-          CAMERA_PROPS.maxPolarAngle
-        ),
-        true
-      );
-    } else if (type === "Zoom") {
-      {
-        await cameraControlRef?.current.dollyTo(
-          getRandomArbitrary(
-            CAMERA_PROPS.minDistance,
-            CAMERA_PROPS.maxDistance
-          ),
-          true
-        );
-      }
-    }
+    await cameraControlRef?.current.rotateTo(
+      getRandomArbitrary(0, 2 * Math.PI),
+      getRandomArbitrary(
+        CAMERA_PROPS.minPolarAngle,
+        CAMERA_PROPS.maxPolarAngle
+      ),
+      true
+    );
     settransition(false);
   }
 
   useEffect(() => {
     if (active) {
-      console.info("active");
       intervalId = setInterval(() => {
         if (cameraControlRef) settransition(true);
       }, 2000);
     } else {
-      console.log("inactive");
       clearInterval(intervalId);
       settransition(false);
     }
@@ -69,14 +55,13 @@ export default function Hint({
   useEffect(() => {
     if (transition && active) {
       dragCameraAnimation();
-      console.log("rito", transition, active);
     }
   }, [transition, active]);
 
   return (
     <Html position={position} className="html-ob">
       {active && (
-        <div className="overlay hint">
+        <div className="hint">
           {isDesktop ? (
             <p>{HINTS[type].Desktop}</p>
           ) : (

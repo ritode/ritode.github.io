@@ -1,7 +1,6 @@
 import CatPlayer from "./CatPlayer";
 import { useProgress, Html, Center } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { EffectComposer, Glitch } from "@react-three/postprocessing";
 
 export default function LandingPage() {
@@ -28,9 +27,15 @@ export default function LandingPage() {
           </EffectComposer>
           <Center>
             <Html>
-              <h1 style={{ marginLeft: "-60px", fontWeight: "1" }}>
+              <h3
+                style={{
+                  marginLeft: "-56px",
+                  fontWeight: 100,
+                  fontSize: "32px",
+                }}
+              >
                 Loading...
-              </h1>
+              </h3>
             </Html>
           </Center>
         </>

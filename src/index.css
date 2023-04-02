@@ -23,6 +23,3 @@ body::-webkit-scrollbar {
   color: #e0dede;
   overflow: auto;
 }
-p {
-  white-space: nowrap;
-}
