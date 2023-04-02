@@ -23,14 +23,6 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
       });
     };
   });
-  // useEffect(() => {
-  //   if (selected) {
-  //     console.log(cameraControlRef?.current.mouseButtons.wheel);
-  //     if (cameraControlRef?.current?.distance < 4) {
-  //       cameraControlRef.current.mouseButtons.wheel = 1;
-  //     }
-  //   }
-  // }, [selected, cameraControlRef]);
 
   function handlePlanetClick() {
     setPlanet(name);

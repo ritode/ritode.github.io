@@ -3,7 +3,7 @@ import React from "react";
 import "./IntroCard.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Icon, Paper, Typography } from "@material-ui/core";
+// import { Icon, Paper, Typography } from "@material-ui/core";
 import Rito from "../Images/rito.jpg";
 import { Instagram, GitHub } from "@material-ui/icons";
 

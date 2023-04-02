@@ -91,3 +91,72 @@ export const HINTS = {
     Mobile: "Double Click to go back",
   },
 };
+export const accordionData = [
+  {
+    title: "Javascript",
+    content: [
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+    ],
+  },
+  {
+    title: "HTML/CSS",
+    content: [
+      {
+        id: "card_1",
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        id: "card_2",
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        id: "card_3",
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        id: "card_4",
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+    ],
+  },
+  {
+    title: "ReactJS",
+    content: [
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+      {
+        title: "Lorem ipsum, dolor sit amet",
+        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+      },
+    ],
+  },
+];

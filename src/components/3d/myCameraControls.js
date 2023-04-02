@@ -1,11 +1,10 @@
 import { CameraControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
-import { Vector3 } from "three";
+import { useEffect, useRef } from "react";
 export default function MyCameraControls({ props, setRef }) {
   const ref = useRef(null);
   useEffect(() => {
     setRef(ref);
+    ref.current.mouseButtons.wheel = 0;
   });
 
   return (

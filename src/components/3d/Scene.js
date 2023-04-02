@@ -29,11 +29,11 @@ export default function Scene() {
       ob.polarRotateSpeed = CAMERA_PROPS.polarRotateSpeed;
       ob.maxDistance = CAMERA_PROPS.maxDistance;
       setCameraProps(ob);
-      // cameraControlRef?.current?.rotateTo(
-      //   cameraControlRef?.current.azimuthAngle,
-      //   1.5,
-      //   true
-      // );
+      cameraControlRef?.current?.rotateTo(
+        cameraControlRef?.current.azimuthAngle,
+        1.5,
+        true
+      );
       cameraControlRef?.current?.dollyTo(4.5, true);
       window.history.replaceState(null, null, "/");
     } else {

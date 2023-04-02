@@ -27,9 +27,15 @@ export default function LandingPage() {
           </EffectComposer>
           <Center>
             <Html>
-              <h1 style={{ marginLeft: "-60px", fontWeight: "1" }}>
+              <h3
+                style={{
+                  marginLeft: "-56px",
+                  fontWeight: 100,
+                  fontSize: "32px",
+                }}
+              >
                 Loading...
-              </h1>
+              </h3>
             </Html>
           </Center>
         </>
