@@ -3,7 +3,7 @@ import { OBJECTS } from "../constants/objects";
 import "./pageStyle.css";
 
 export default function AboutMe() {
-  const path = window.location.href.split("/")[3];
+  const path = window.location.href.split("?")[1];
 
   return (
     <Html position={OBJECTS[path].position} className="html-ob">

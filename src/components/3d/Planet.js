@@ -28,7 +28,7 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
     setSelected(true);
     cameraControlRef?.current?.setTarget(...OBJECTS[name].position, true);
     cameraControlRef?.current?.dollyTo(4, true);
-    window.history.replaceState(null, null, `/${name}`);
+    window.history.replaceState(null, null, `?${name}`);
   }
   useFrame(() => {
     if (pref) {

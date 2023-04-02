@@ -6,7 +6,7 @@ import Accordion from "./Accordion";
 import { accordionData } from "../constants/objects";
 
 export default function Tech() {
-  const path = window.location.href.split("/")[3];
+  const path = window.location.href.split("?")[1];
   const [active, setActive] = useState(false);
   return (
     <Html position={OBJECTS[path].position} className="html-ob">

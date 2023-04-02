@@ -1,9 +1,14 @@
 import Tech from "../2d/Tech";
 import AboutMe from "../2d/AboutMe";
 import WIP from "../2d/WIP";
+import { useEffect } from "react";
 
 export default function DisplayPage() {
-  const path = window.location.href.split("/")[3];
+  const path = window.location.href.split("?")[1];
+  useEffect(() => {
+    console.log(path);
+  }, [path]);
+
   switch (path) {
     case "planet1":
       return <AboutMe />;
