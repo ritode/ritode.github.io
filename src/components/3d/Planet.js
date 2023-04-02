@@ -6,7 +6,6 @@ import { useRef, useState, useEffect } from "react";
 
 export default function Planet({ name, cameraControlRef, setPlanet }) {
   const p = useGLTF(OBJECTS[name].model);
-  const pin = useGLTF("/models/map_pin.glb");
   const pref = useRef(null);
   const [selected, setSelected] = useState(false);
   const [textPosition, setTextPosition] = useState(null);
@@ -69,14 +68,6 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
         }
         onClick={() => handlePlanetClick()}
       />
-      {selected && (
-        <primitive
-          key={"pin"}
-          object={pin.scene}
-          position={OBJECTS[name].textPositionOffset}
-          castShadow
-        />
-      )}
       {!selected && (
         <Text3D
           font="./fonts/Inter_Bold.json"
