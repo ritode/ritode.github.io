@@ -19,6 +19,7 @@
 }
 .overlay {
   width: 700px;
+  height: 600px;
   margin: 20px 0;
   overflow: auto;
   display: flex;
@@ -30,6 +31,7 @@
   display: flex;
   height: 600px;
   overflow: auto;
+  display: flex;
 }
 .overlay p {
   border-radius: 6px;
@@ -56,24 +58,9 @@
   margin: auto;
 }
 .hint > p {
-  margin: auto;
-  line-height: 4;
+  margin: 1em auto;
   font-size: 18px;
   white-space: nowrap;
-}
-@media only screen and (max-width: 600px) {
-  .screen {
-    width: 300px;
-    margin-left: -150px;
-  }
-  .screen p {
-    word-wrap: break-word !important;
-    white-space: initial;
-  }
-  .hint {
-    margin: 220px 0;
-    width: 300px;
-  }
 }
 
 #cards {
@@ -171,4 +158,25 @@ p {
 }
 .stacking-cards > ul > li {
   margin: 1em;
+}
+@media only screen and (max-width: 600px) {
+  .overlay {
+    width: 95vw;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+  }
+  .hint {
+    margin: 220px 0;
+    width: 300px;
+  }
+  .accordion {
+    width: 90vw;
+  }
+  .overlay-tech {
+    height: 500px;
+  }
+  .overlay {
+    height: 550px;
+  }
 }

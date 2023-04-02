@@ -22,4 +22,5 @@ body::-webkit-scrollbar {
   font-size: 16px;
   color: #e0dede;
   overflow: auto;
+  background-color: black;
 }
