@@ -96,8 +96,7 @@ export const accordionData = [
     title: "Javascript",
     content: [
       {
-        title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        title: "What are Arrow Functions in Javascript?",
       },
       {
         title: "Lorem ipsum, dolor sit amet",

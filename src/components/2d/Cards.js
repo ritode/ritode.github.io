@@ -5,15 +5,16 @@ export default function Cards({ content }) {
         {content.map(({ id, title, content }) => (
           <li class="card" id={id}>
             <div class="card__content">
-              <div>
-                <h3>{title}</h3>
-                <p>{content}</p>
-                <p>
-                  <a href="#top" class="btn btn--accent">
-                    Read more
-                  </a>
-                </p>
-              </div>
+              <h3>{title}</h3>
+              {/* <p>{content}</p> */}
+              <p>
+                <a
+                  href="https://medium.com/@deritobrita/what-are-arrow-functions-in-javascript-4a14bc16ae4c"
+                  class="btn btn--accent"
+                >
+                  Read more
+                </a>
+              </p>
             </div>
           </li>
         ))}
