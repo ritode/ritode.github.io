@@ -188,3 +188,9 @@ p {
     height: 550px;
   }
 }
+.card__content-mobile a {
+  color: white;
+  text-shadow: -0.5px 0 hotpink, 0 0.5px hotpink, 0.5px 0 hotpink,
+    0 -0.5px hotpink;
+  text-decoration: none;
+}

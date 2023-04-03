@@ -43,7 +43,7 @@ export default function Scene() {
       ob.maxPolarAngle = 2 * Math.PI;
       ob.azimuthRotateSpeed = -1 * CAMERA_PROPS.azimuthRotateSpeed;
       ob.polarRotateSpeed = -1 * CAMERA_PROPS.polarRotateSpeed;
-      ob.maxDistance = 4.6;
+      ob.maxDistance = 6;
       setCameraProps(ob);
     }
   }, [planetSelected]);

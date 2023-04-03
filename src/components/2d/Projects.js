@@ -1,17 +1,15 @@
 import { Html } from "@react-three/drei";
 import { OBJECTS } from "../constants/objects";
-import { useSceneStore } from "../store/sceneStore";
 import { Text3D } from "@react-three/drei";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
-export default function WIP() {
+export default function Projects() {
   const path = window.location.href.split("?")[1];
-  const catGhost = useSceneStore.getState().catGhost;
   const ref = useRef(null);
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
-    ref.current.position.y = Math.tan(a) / 6 + 2;
+    ref.current.position.y = Math.sin(a) / 4 + 2;
   });
 
   return (
@@ -30,8 +28,8 @@ export default function WIP() {
         letterSpacing={0.03}
         size={0.15}
         scale={[1, 1, 0.5]}
-        position={[-1, 1.7, 4]}
-        rotation={[0, 3.14, 0]}
+        position={[4.4, 2, 3.5]}
+        rotation={OBJECTS[path].textRotationOffset}
         ref={ref}
       >
         {`Coming\n  Soon`}

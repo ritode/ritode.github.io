@@ -3,9 +3,15 @@ import { useFrame } from "@react-three/fiber";
 import { MathUtils } from "three";
 import { useRef } from "react";
 import { OBJECTS } from "../constants/objects";
+import { useSceneStore } from "../store/sceneStore";
+import { useEffect } from "react";
 export default function CatPlayer() {
   const cat = useGLTF("models/cat-ghost.glb");
   const catRef = useRef(null);
+  useEffect(() => {
+    useSceneStore.setState({ catGhost: catRef });
+  }, [catRef]);
+
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (catRef.current) {

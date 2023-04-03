@@ -1,6 +1,8 @@
 import Tech from "../2d/Tech";
 import AboutMe from "../2d/AboutMe";
-import WIP from "../2d/WIP";
+import Travel from "./Travel";
+import Projects from "./Projects";
+import WIP from "./WIP";
 import { useEffect } from "react";
 
 export default function DisplayPage() {
@@ -17,13 +19,13 @@ export default function DisplayPage() {
       return <Tech />;
       break;
     case "planet3":
-      return <WIP />;
+      return <Projects />;
       break;
     case "planet4":
       return <WIP />;
       break;
     case "planet5":
-      return <WIP />;
+      return <Travel />;
       break;
     default:
       return null;
