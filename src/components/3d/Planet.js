@@ -32,30 +32,30 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
   }
   useFrame(() => {
     if (pref) {
-      if (!selected) {
-        switch (name) {
-          case "planet1":
-            pref.current.rotation.y += 0.005;
-            pref.current.rotation.z += 0.001;
-            break;
-          case "planet2":
-            pref.current.children[0].children[0].children[0].rotation.x -= 0.002;
-            pref.current.children[0].children[0].children[1].rotation.z += 0.005;
-            break;
-          case "planet3":
-            pref.current.children[0].children[0].children[0].children[0].rotation.y += 0.001;
-            pref.current.children[0].children[0].children[0].children[1].rotation.y -= 0.005;
-            break;
-          case "planet4":
-            pref.current.rotation.y += 0.005;
-            break;
-          case "planet5":
-            pref.current.children[0].children[0].children[0].children[0].children[0].children[0].rotation.y += 0.005;
-            pref.current.children[0].children[0].children[0].children[0].children[0].children[1].rotation.y -= 0.005;
-            break;
-        }
+      // if (!selected) {
+      switch (name) {
+        case "planet1":
+          pref.current.rotation.y += 0.005;
+          pref.current.rotation.z += 0.001;
+          break;
+        case "planet2":
+          pref.current.children[0].children[0].children[0].rotation.x -= 0.002;
+          pref.current.children[0].children[0].children[1].rotation.z += 0.005;
+          break;
+        case "planet3":
+          pref.current.children[0].children[0].children[0].children[0].rotation.y += 0.001;
+          pref.current.children[0].children[0].children[0].children[1].rotation.y -= 0.005;
+          break;
+        case "planet4":
+          pref.current.rotation.y += 0.005;
+          break;
+        case "planet5":
+          pref.current.children[0].children[0].children[0].children[0].children[0].children[0].rotation.y += 0.005;
+          pref.current.children[0].children[0].children[0].children[0].children[0].children[1].rotation.y -= 0.005;
+          break;
       }
     }
+    // }
   });
 
   return (

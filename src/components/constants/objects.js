@@ -97,18 +97,19 @@ export const accordionData = [
     content: [
       {
         title: "What are Arrow Functions in Javascript?",
+        url: "https://medium.com/@deritobrita/what-are-arrow-functions-in-javascript-4a14bc16ae4c",
       },
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
     ],
   },
@@ -118,22 +119,12 @@ export const accordionData = [
       {
         id: "card_1",
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
       {
         id: "card_2",
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
-      },
-      {
-        id: "card_3",
-        title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
-      },
-      {
-        id: "card_4",
-        title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
     ],
   },
@@ -142,19 +133,15 @@ export const accordionData = [
     content: [
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
       {
         title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
-      },
-      {
-        title: "Lorem ipsum, dolor sit amet",
-        content: "Lorem ipsum, dolor sit amet lorem ipsum, dolor sit amet.",
+        url: "https://medium.com/@deritobrita",
       },
     ],
   },

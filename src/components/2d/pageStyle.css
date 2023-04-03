@@ -157,8 +157,9 @@ p {
   }
 }
 .stacking-cards {
-  height: 350px;
+  max-height: 350px;
   overflow: scroll;
+  min-height: 100px;
 }
 .stacking-cards > ul {
   padding: 0px;

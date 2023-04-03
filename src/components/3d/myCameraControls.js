@@ -11,7 +11,7 @@ export default function MyCameraControls({ props, setRef }) {
     <CameraControls
       makeDefault
       autoRotate
-      autoRotateSpeed={0.2}
+      autoRotateSpeed={1}
       minPolarAngle={props.minPolarAngle}
       maxPolarAngle={props.maxPolarAngle}
       maxDistance={props.maxDistance}
