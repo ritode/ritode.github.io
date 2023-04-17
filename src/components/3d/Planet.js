@@ -1,56 +1,45 @@
-import { OBJECTS } from "../constants/objects";
 import { isMobile } from "react-device-detect";
+
 import { useGLTF, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+
 import { useRef, useState, useEffect } from "react";
 
-export default function Planet({ name, cameraControlRef, setPlanet }) {
-  const p = useGLTF(OBJECTS[name].model);
+import { PLANETS, CAMERA_PROPS } from "../constants/objects";
+import { useSceneStore } from "../store/sceneStore";
+
+export default function Planet({ name }) {
+  const cameraControlRef = useSceneStore((state) => state.cameraControl);
+
+  const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
+  const setCameraControlProps = useSceneStore((s) => s.setCameraControlProps);
+  const setPlanetSelected = useSceneStore((state) => state.setPlanetSelected);
+
+  const p = useGLTF(PLANETS[name].model);
   const pref = useRef(null);
+
   const [selected, setSelected] = useState(false);
-  const [textPosition, setTextPosition] = useState(null);
 
-  useEffect(() => {
-    window.addEventListener("dblclick", () => {
-      setPlanet("");
-      setSelected(false);
-    });
-    return () => {
-      window.removeEventListener("dblclick", () => {
-        setPlanet("");
-        setSelected(false);
-      });
-    };
-  });
-
-  function handlePlanetClick() {
-    setPlanet(name);
-    setSelected(true);
-    cameraControlRef?.current?.setTarget(...OBJECTS[name].position, true);
-    if (isMobile) cameraControlRef?.current?.dollyTo(6, true);
-    else cameraControlRef?.current?.dollyTo(4.5, true);
-    window.history.replaceState(null, null, `?${name}`);
-  }
   useFrame(() => {
     if (pref) {
       // if (!selected) {
       switch (name) {
-        case "planet1":
+        case PLANETS.Me.title:
           pref.current.rotation.y += 0.005;
           pref.current.rotation.z += 0.001;
           break;
-        case "planet2":
+        case PLANETS.Tech.title:
           pref.current.children[0].children[0].children[0].rotation.x -= 0.002;
           pref.current.children[0].children[0].children[1].rotation.z += 0.005;
           break;
-        case "planet3":
+        case PLANETS.Projects.title:
           pref.current.children[0].children[0].children[0].children[0].rotation.y += 0.001;
           pref.current.children[0].children[0].children[0].children[1].rotation.y -= 0.005;
           break;
-        case "planet4":
+        case PLANETS.Art.title:
           pref.current.rotation.y += 0.005;
           break;
-        case "planet5":
+        case PLANETS.Travel.title:
           pref.current.children[0].children[0].children[0].children[0].children[0].children[0].rotation.y += 0.005;
           pref.current.children[0].children[0].children[0].children[0].children[0].children[1].rotation.y -= 0.005;
           break;
@@ -59,13 +48,64 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
     // }
   });
 
+  function handlePlanetClick() {
+    if (!selected) {
+      setPlanetSelected(name);
+      setSelected(true);
+      cameraControlRef?.current?.setTarget(...PLANETS[name].position, true);
+      if (isMobile) cameraControlRef?.current?.dollyTo(6, true);
+      else cameraControlRef?.current?.dollyTo(4.5, true);
+      window.history.replaceState(null, null, `?${name}`);
+    }
+    const ob = { ...cameraControlProps };
+    ob.minPolarAngle = 0;
+    ob.maxPolarAngle = 2 * Math.PI;
+    ob.azimuthRotateSpeed = -1 * CAMERA_PROPS.azimuthRotateSpeed;
+    ob.polarRotateSpeed = -1 * CAMERA_PROPS.polarRotateSpeed;
+    ob.maxDistance = 6;
+    setCameraControlProps(ob);
+  }
+
+  function handlePlanetUnclick() {
+    setPlanetSelected("");
+    setSelected(false);
+    window.history.replaceState(null, null, `?${name}`);
+    cameraControlRef?.current?.setTarget(0, 1, 0, true);
+    cameraControlRef?.current?.moveTo(0, 0, 0, true);
+    const ob = { ...cameraControlProps };
+    ob.minPolarAngle = CAMERA_PROPS.minPolarAngle;
+    ob.maxPolarAngle = CAMERA_PROPS.maxPolarAngle;
+    ob.azimuthRotateSpeed = CAMERA_PROPS.azimuthRotateSpeed;
+    ob.polarRotateSpeed = CAMERA_PROPS.polarRotateSpeed;
+    ob.maxDistance = CAMERA_PROPS.maxDistance;
+    setCameraControlProps(ob);
+    cameraControlRef?.current?.rotateTo(
+      cameraControlRef?.current.azimuthAngle,
+      1.5,
+      true
+    );
+    cameraControlRef?.current?.dollyTo(4.5, true);
+    window.history.replaceState(null, null, "/");
+  }
+
+  useEffect(() => {
+    window.addEventListener("dblclick", () => {
+      handlePlanetUnclick();
+    });
+    return () => {
+      window.removeEventListener("dblclick", () => {
+        handlePlanetUnclick();
+      });
+    };
+  });
+
   return (
-    <mesh key={OBJECTS[name].key} position={OBJECTS[name].position} castShadow>
+    <mesh key={PLANETS[name].key} position={PLANETS[name].position} castShadow>
       <primitive
         object={p.scene}
         ref={pref}
         scale={
-          isMobile ? OBJECTS[name].scale.mobile : OBJECTS[name].scale.desktop
+          isMobile ? PLANETS[name].scale.mobile : PLANETS[name].scale.desktop
         }
         onClick={() => handlePlanetClick()}
       />
@@ -81,10 +121,10 @@ export default function Planet({ name, cameraControlRef, setPlanet }) {
           letterSpacing={0.03}
           size={0.5}
           scale={[1, 1, 0.5]}
-          position={OBJECTS[name].textPositionOffset}
-          rotation={OBJECTS[name].textRotationOffset}
+          position={PLANETS[name].textPositionOffset}
+          rotation={PLANETS[name].textRotationOffset}
         >
-          {OBJECTS[name].text}
+          {PLANETS[name].text}
           <meshNormalMaterial />
         </Text3D>
       )}

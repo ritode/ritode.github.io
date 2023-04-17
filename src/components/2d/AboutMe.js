@@ -1,12 +1,12 @@
 import { Html } from "@react-three/drei";
-import { OBJECTS } from "../constants/objects";
+import { PLANETS } from "../constants/objects";
 import "./pageStyle.css";
 
 export default function AboutMe() {
-  const path = window.location.href.split("?")[1];
+  const path = "Me";
 
   return (
-    <Html position={OBJECTS[path].position} className="html-ob">
+    <Html position={PLANETS[path].position} className="html-ob">
       <h1 className="planet-heading">About Me</h1>
       <div className="overlay">
         <img src="/images/me.png" />

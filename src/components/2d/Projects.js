@@ -1,11 +1,11 @@
 import { Html } from "@react-three/drei";
-import { OBJECTS } from "../constants/objects";
+import { PLANETS } from "../constants/objects";
 import { Text3D } from "@react-three/drei";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
 export default function Projects() {
-  const path = window.location.href.split("?")[1];
+  const path = "Projects";
   const ref = useRef(null);
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
@@ -14,7 +14,7 @@ export default function Projects() {
 
   return (
     <>
-      <Html position={OBJECTS[path].position} className="html-ob">
+      <Html position={PLANETS[path].position} className="html-ob">
         {/* <h1 className="planet-heading">W I P</h1> */}
       </Html>
       <Text3D
@@ -29,7 +29,7 @@ export default function Projects() {
         size={0.15}
         scale={[1, 1, 0.5]}
         position={[4.4, 2, 3.5]}
-        rotation={OBJECTS[path].textRotationOffset}
+        rotation={PLANETS[path].textRotationOffset}
         ref={ref}
       >
         {`Coming\n  Soon`}

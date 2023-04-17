@@ -1,13 +1,17 @@
 import { Html } from "@react-three/drei";
-import { OBJECTS } from "../constants/objects";
+import { PLANETS } from "../constants/objects";
 import { useSceneStore } from "../store/sceneStore";
 import { Text3D } from "@react-three/drei";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { useEffect } from "react";
 
 export default function WIP() {
-  const path = window.location.href.split("?")[1];
-  const catGhost = useSceneStore.getState().catGhost;
+  const path = WIP;
+  useEffect(() => {
+    const catGhost = useSceneStore.getState().catGhost;
+  }, [useSceneStore.getState().catGhost]);
+
   const ref = useRef(null);
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
@@ -16,7 +20,7 @@ export default function WIP() {
 
   return (
     <>
-      <Html position={OBJECTS[path].position} className="html-ob">
+      <Html position={PLANETS[path].position} className="html-ob">
         {/* <h1 className="planet-heading">W I P</h1> */}
       </Html>
       <Text3D

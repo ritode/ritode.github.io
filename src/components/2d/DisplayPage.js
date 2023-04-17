@@ -5,26 +5,21 @@ import Projects from "./Projects";
 import WIP from "./WIP";
 import { useEffect } from "react";
 
-export default function DisplayPage() {
-  const path = window.location.href.split("?")[1];
-  useEffect(() => {
-    console.log(path);
-  }, [path]);
-
-  switch (path) {
-    case "planet1":
+export default function DisplayPage({ planet }) {
+  switch (planet) {
+    case "Me":
       return <AboutMe />;
       break;
-    case "planet2":
+    case "Tech":
       return <Tech />;
       break;
-    case "planet3":
+    case "Projects":
       return <Projects />;
       break;
-    case "planet4":
+    case "WIP":
       return <WIP />;
       break;
-    case "planet5":
+    case "Travel":
       return <Travel />;
       break;
     default:
