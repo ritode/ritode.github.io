@@ -23,12 +23,12 @@ export const CAMERA_PROPS = {
 };
 export const HINTS = {
   Drag: {
-    Desktop: "Click and drag to interact",
-    Mobile: "Swipe to interact",
+    Desktop: "./images/IntructionMessage.svg",
+    Mobile: "./images/IntructionMessage.svg",
   },
   Zoom: {
-    Desktop: "Double Click to go back",
-    Mobile: "Double Click to go back",
+    Desktop: "./images/Backmessage.svg",
+    Mobile: "./images/Backmessage.svg",
   },
 };
 export const accordionData = [

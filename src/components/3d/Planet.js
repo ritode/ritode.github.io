@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from "react";
 
 import { PLANETS, CAMERA_PROPS } from "../constants/objects";
 import { useSceneStore } from "../store/sceneStore";
+import Hint from "./Hints";
 
 export default function Planet({ name }) {
   const cameraControlRef = useSceneStore((state) => state.cameraControl);
@@ -15,10 +16,12 @@ export default function Planet({ name }) {
   const setCameraControlProps = useSceneStore((s) => s.setCameraControlProps);
   const setPlanetSelected = useSceneStore((state) => state.setPlanetSelected);
 
+  const [showZoomHint, setShowZoomHint] = useState(false);
+
   const p = useGLTF(PLANETS[name].model);
   const pref = useRef(null);
 
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState();
 
   useFrame(() => {
     if (pref) {
@@ -49,6 +52,7 @@ export default function Planet({ name }) {
   });
 
   function handlePlanetClick() {
+    if (typeof selected === "undefined") setShowZoomHint(true);
     if (!selected) {
       setPlanetSelected(name);
       setSelected(true);
@@ -128,6 +132,7 @@ export default function Planet({ name }) {
           <meshNormalMaterial />
         </Text3D>
       )}
+      {showZoomHint && <Hint type="Zoom" active={showZoomHint} />}
     </mesh>
   );
 }

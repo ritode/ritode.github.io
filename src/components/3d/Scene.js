@@ -18,7 +18,6 @@ export default function Scene() {
       <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
       <MyCameraControls props={cameraControlProps} />
       <LandingPage />
-
       <Hint type="Drag" />
       <DisplayPage planet={planetSelected} />
       {Object.keys(PLANETS).map((key) => (

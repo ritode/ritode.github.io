@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Vector3 } from "three";
 import { HINTS, CAMERA_PROPS } from "../constants/objects";
 import { useSceneStore } from "../store/sceneStore";
+import { useFrame } from "@react-three/fiber";
 
 export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
   let cameraControlRef;
@@ -11,8 +12,7 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
     cameraControlRef = useSceneStore.getState().cameraControl;
   }, [useSceneStore.getState().cameraControl]);
 
-  const [transition, settransition] = useState(false);
-  let intervalId;
+  const [showHint, setShowHint] = useState(true);
 
   function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -27,9 +27,13 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
       ),
       true
     );
-    settransition(false);
   }
-  const [showHint, setShowHint] = useState(true);
+
+  useFrame(() => {
+    if (showHint) {
+      if (!cameraControlRef.current.active) dragCameraAnimation();
+    }
+  });
 
   function handleClick() {
     if (showHint) setShowHint(false);
@@ -40,17 +44,19 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
       window.removeEventListener("click", () => handleClick());
     };
   });
+  useEffect(() => {
+    setTimeout(() => {
+      setShowHint(false);
+    }, 5000);
+  });
+
   if (showHint) {
     return (
       <Html position={position} className="html-ob">
-        <div className="hint">
-          {isDesktop ? (
-            <p>{HINTS[type].Desktop}</p>
-          ) : (
-            <p>{HINTS[type].Mobile}</p>
-          )}
-          <p>- click to continue -</p>
-        </div>
+        <img
+          src={isDesktop ? HINTS[type].Desktop : HINTS[type].Mobile}
+          className="hint-img"
+        />
       </Html>
     );
   } else return null;
