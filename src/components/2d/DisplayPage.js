@@ -4,6 +4,7 @@ import Travel from "./Travel";
 import Projects from "./Projects";
 import WIP from "./WIP";
 import { useEffect } from "react";
+import Art from "./Art";
 
 export default function DisplayPage({ planet }) {
   switch (planet) {
@@ -18,6 +19,9 @@ export default function DisplayPage({ planet }) {
       break;
     case "WIP":
       return <WIP />;
+      break;
+    case "Art":
+      return <Art />;
       break;
     case "Travel":
       return <Travel />;

@@ -25,37 +25,13 @@ export default function CatModel() {
   useEffect(() => {
     useSceneStore.setState({ catGhost: catRef });
   }, [catRef]);
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (catRef.current) {
-      catRef.current.rotation.x = MathUtils.lerp(
-        catRef.current.rotation.x,
-        Math.cos(t / 10) / 20,
-        0.1
-      );
-      catRef.current.rotation.y = MathUtils.lerp(
-        catRef.current.rotation.y,
-        Math.sin(t / 10) / 4,
-        0.1
-      );
-      catRef.current.rotation.z = MathUtils.lerp(
-        catRef.current.rotation.z,
-        Math.sin(t / 10) / 10,
-        0.1
-      );
-      catRef.current.position.y = MathUtils.lerp(
-        catRef.current.position.y,
-        -Math.sin(t) / 7 - 1,
-        0.1
-      );
-    }
-  });
   return (
     <group
       position={OBJECTS.cat.position}
       dispose={null}
       ref={catRef}
       onPointerOver={(e) => setHovered(true)}
+      onClick={(e) => setHovered(!hovered)}
       onPointerOut={(e) => setHovered(false)}
     >
       <group rotation={[-1.46, -0.08, 1.5]} scale={0.18}>
@@ -64,14 +40,12 @@ export default function CatModel() {
             geometry={nodes.Object_4.geometry}
             material={materials["Material.001"]}
           >
-            {hovered && (
-              <MeshWobbleMaterial
-                color={catColors[getRandomInt(catColors.length - 1)]}
-                // map={materials["Material.001"]}
-                factor={0.3}
-                speed={5}
-              />
-            )}
+            <MeshWobbleMaterial
+              color={hovered && catColors[getRandomInt(catColors.length - 1)]}
+              // map={materials["Material.001"]}
+              factor={hovered && 0.3}
+              speed={hovered && 5}
+            />
           </mesh>
           <mesh
             geometry={nodes.Object_8.geometry}

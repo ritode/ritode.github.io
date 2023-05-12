@@ -1,0 +1,18 @@
+.css-doq0dk {
+  width: 35vw !important;
+  height: 35vw !important;
+  margin-top: auto !important;
+}
+@media screen and (orientation: portrait) {
+  .css-doq0dk {
+    width: 60vw !important;
+    height: 60vw !important;
+  }
+}
+.css-1qzevvg {
+  margin-bottom: auto !important;
+  margin-top: 1.5rem !important;
+}
+.css-1qzevvg img {
+  filter: invert(100%);
+}
