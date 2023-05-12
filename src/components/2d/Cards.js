@@ -10,7 +10,12 @@ export default function Cards({ content }) {
               {isDesktop ? (
                 <>
                   <h3>{title}</h3>
-                  <a href={url} class="btn btn--accent">
+                  <a
+                    href={url}
+                    class="btn btn--accent"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Read more
                   </a>
                 </>
