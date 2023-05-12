@@ -4,10 +4,24 @@ import { useRef, useEffect, useState } from "react";
 import { MathUtils } from "three";
 import { useSceneStore } from "../store/sceneStore";
 import { MeshWobbleMaterial } from "@react-three/drei";
-export default function CatModel({ position }) {
+import { OBJECTS } from "../constants/objects";
+export default function CatModel() {
   const { nodes, materials } = useGLTF("models/cat-ghost.glb");
   const catRef = useRef(null);
+  const catColors = [
+    "skyblue",
+    "indigo",
+    "pink",
+    "hotpink",
+    "salmon",
+    "brown",
+    "aquamarine",
+    "seagreen",
+  ];
   const [hovered, setHovered] = useState(false);
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
   useEffect(() => {
     useSceneStore.setState({ catGhost: catRef });
   }, [catRef]);
@@ -38,7 +52,7 @@ export default function CatModel({ position }) {
   });
   return (
     <group
-      position={position}
+      position={OBJECTS.cat.position}
       dispose={null}
       ref={catRef}
       onPointerOver={(e) => setHovered(true)}
@@ -52,7 +66,7 @@ export default function CatModel({ position }) {
           >
             {hovered && (
               <MeshWobbleMaterial
-                color="white"
+                color={catColors[getRandomInt(catColors.length - 1)]}
                 // map={materials["Material.001"]}
                 factor={0.3}
                 speed={5}

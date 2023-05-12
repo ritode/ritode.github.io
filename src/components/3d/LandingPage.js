@@ -1,7 +1,7 @@
-import CatPlayer from "./CatPlayer";
 import { useProgress, Html, Center } from "@react-three/drei";
 import { useState, useEffect } from "react";
 import { EffectComposer, Glitch } from "@react-three/postprocessing";
+import CatModel from "./CatModel";
 
 export default function LandingPage() {
   const { progress } = useProgress();
@@ -40,7 +40,7 @@ export default function LandingPage() {
           </Center>
         </>
       )}
-      <CatPlayer />
+      <CatModel />
     </>
   );
 }
