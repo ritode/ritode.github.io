@@ -30,7 +30,7 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
   }
 
   useFrame(() => {
-    if (showHint) {
+    if (showHint && type === "Drag") {
       if (!cameraControlRef.current.active) dragCameraAnimation();
     }
   });
@@ -47,7 +47,7 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
   useEffect(() => {
     setTimeout(() => {
       setShowHint(false);
-    }, 5000);
+    }, 6000);
   });
 
   if (showHint) {

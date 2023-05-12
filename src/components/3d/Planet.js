@@ -17,6 +17,7 @@ export default function Planet({ name }) {
   const setPlanetSelected = useSceneStore((state) => state.setPlanetSelected);
 
   const [showZoomHint, setShowZoomHint] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const p = useGLTF(PLANETS[name].model);
   const pref = useRef(null);
@@ -104,7 +105,14 @@ export default function Planet({ name }) {
   });
 
   return (
-    <mesh key={PLANETS[name].key} position={PLANETS[name].position} castShadow>
+    <mesh
+      key={PLANETS[name].key}
+      position={PLANETS[name].position}
+      castShadow
+      onPointerOver={(e) => setHovered(true)}
+      onPointerOut={(e) => setHovered(false)}
+      scale={hovered && !selected ? 1.1 : 1}
+    >
       <primitive
         object={p.scene}
         ref={pref}
