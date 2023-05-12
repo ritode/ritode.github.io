@@ -24,3 +24,7 @@ body::-webkit-scrollbar {
   overflow: auto;
   background-color: black;
 }
+@font-face {
+  font-family: "backTo1982";
+  src: url("../public/fonts/back-to-1982-regular.ttf") format("truetype");
+}
