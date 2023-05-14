@@ -12,13 +12,13 @@ export default function Art() {
   const slides = [
     {
       key: 1,
-      content: <img src="/images/alien-bong.jpg" alt="1" />,
-      link: "https://www.instagram.com/p/CHLA8_2h5Ce/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==",
+      content: <img src="/images/cat-grass.jpg" alt="1" />,
+      link: "https://unsplash.com/@ritode",
     },
     {
       key: 2,
-      content: <img src="/images/cat-grass.jpg" alt="2" />,
-      link: "https://unsplash.com/@ritode",
+      content: <img src="/images/alien-bong.jpg" alt="2" />,
+      link: "https://www.instagram.com/p/CHLA8_2h5Ce/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==",
     },
     {
       key: 3,

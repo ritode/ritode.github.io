@@ -24,7 +24,7 @@ export const CAMERA_PROPS = {
 export const HINTS = {
   Drag: {
     Desktop: "./images/IntructionMessage.svg",
-    Mobile: "./images/IntructionMessage.svg",
+    Mobile: "./images/swipeInstruction.png",
   },
   Zoom: {
     Desktop: "./images/Backmessage.svg",
