@@ -60,7 +60,7 @@ export default function Planet({ name }) {
       cameraControlRef?.current?.setTarget(...PLANETS[name].position, true);
       if (isMobile) cameraControlRef?.current?.dollyTo(6, true);
       else cameraControlRef?.current?.dollyTo(4.5, true);
-      window.history.replaceState(null, null, `?${name}`);
+      // window.history.replaceState(null, null, `?${name}`);
     }
     const ob = { ...cameraControlProps };
     ob.minPolarAngle = 0;
@@ -90,7 +90,7 @@ export default function Planet({ name }) {
       true
     );
     cameraControlRef?.current?.dollyTo(4.5, true);
-    window.history.replaceState(null, null, "/");
+    // window.history.replaceState(null, null, "/");
   }
 
   useEffect(() => {
