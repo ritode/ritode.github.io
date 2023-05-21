@@ -74,7 +74,7 @@ export default function Planet({ name }) {
   function handlePlanetUnclick() {
     setPlanetSelected("");
     setSelected(false);
-    window.history.replaceState(null, null, `?${name}`);
+    // window.history.replaceState(null, null, `?${name}`);
     cameraControlRef?.current?.setTarget(0, 1, 0, true);
     cameraControlRef?.current?.moveTo(0, 0, 0, true);
     const ob = { ...cameraControlProps };
