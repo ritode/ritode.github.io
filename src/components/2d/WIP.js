@@ -8,9 +8,6 @@ import { useEffect } from "react";
 
 export default function WIP() {
   const path = "WIP";
-  useEffect(() => {
-    const catGhost = useSceneStore.getState().catGhost;
-  }, [useSceneStore.getState().catGhost]);
 
   const ref = useRef(null);
   useFrame(({ clock }) => {

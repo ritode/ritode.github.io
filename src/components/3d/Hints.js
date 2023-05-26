@@ -20,7 +20,7 @@ export default function Hint({ type, position = new Vector3(0, 0, 0) }) {
 
   async function dragCameraAnimation() {
     await cameraControlRef?.current.rotateTo(
-      getRandomArbitrary(0, 2 * Math.PI),
+      cameraControlRef.current.azimuthAngle + getRandomArbitrary(1, 3.5),
       getRandomArbitrary(
         CAMERA_PROPS.minPolarAngle,
         CAMERA_PROPS.maxPolarAngle
