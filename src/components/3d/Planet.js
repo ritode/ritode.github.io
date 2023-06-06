@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from "react";
 
 import { PLANETS, CAMERA_PROPS } from "../constants/objects";
 import { useSceneStore } from "../store/sceneStore";
+import { useSpring, animated, config } from "@react-spring/three";
 import Hint from "./Hints";
 
 export default function Planet({ name }) {
@@ -28,10 +29,6 @@ export default function Planet({ name }) {
     if (pref) {
       // if (!selected) {
       switch (name) {
-        case PLANETS.Me.title:
-          pref.current.rotation.y += 0.005;
-          pref.current.rotation.z += 0.001;
-          break;
         case PLANETS.Tech.title:
           pref.current.children[0].children[0].children[0].rotation.x -= 0.002;
           pref.current.children[0].children[0].children[1].rotation.z += 0.005;
@@ -103,15 +100,18 @@ export default function Planet({ name }) {
       });
     };
   });
-
+  const { scale } = useSpring({
+    scale: hovered && !selected ? 1.1 : 1,
+    config: config.wobbly,
+  });
   return (
-    <mesh
+    <animated.mesh
       key={PLANETS[name].key}
       position={PLANETS[name].position}
       castShadow
       onPointerOver={(e) => setHovered(true)}
       onPointerOut={(e) => setHovered(false)}
-      scale={hovered && !selected ? 1.1 : 1}
+      scale={scale}
     >
       <primitive
         object={p.scene}
@@ -141,6 +141,6 @@ export default function Planet({ name }) {
         </Text3D>
       )}
       {showZoomHint && <Hint type="Zoom" active={showZoomHint} />}
-    </mesh>
+    </animated.mesh>
   );
 }

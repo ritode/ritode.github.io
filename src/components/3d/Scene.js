@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MyCameraControls from "./myCameraControls";
 import LandingPage from "./LandingPage";
 import { Environment } from "@react-three/drei";
@@ -7,6 +6,7 @@ import { PLANETS } from "../constants/objects";
 import { useSceneStore } from "../store/sceneStore";
 import Hint from "./Hints";
 import DisplayPage from "../2d/DisplayPage";
+import AboutMePlanet from "../3d/AboutMePlanet";
 
 export default function Scene() {
   const planetSelected = useSceneStore((state) => state.planetSelected);
@@ -19,6 +19,7 @@ export default function Scene() {
       <MyCameraControls props={cameraControlProps} />
       <LandingPage />
       <Hint type="Drag" />
+      <AboutMePlanet />
       <DisplayPage planet={planetSelected} />
       {Object.keys(PLANETS).map((key) => (
         <Planet name={key} />

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://ritode.github.io/",
   "dependencies": {
+    "@react-spring/three": "^9.7.2",
     "@react-three/drei": "9.56.18",
     "@react-three/fiber": "8.11.0",
     "@react-three/postprocessing": "2.7.0",
@@ -15,6 +16,7 @@
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
     "react-spring-3d-carousel": "^1.3.4",
+    "react-three-fiber": "^6.0.13",
     "three": "0.149.0",
     "zustand": "^4.3.6"
   },

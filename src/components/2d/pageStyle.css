@@ -56,6 +56,9 @@
   .hint-img {
     width: 80vw;
   }
+  .planet-heading {
+    font-size: smaller;
+  }
 }
 #cards {
   list-style: none;
@@ -187,4 +190,12 @@ p {
   text-shadow: -0.5px 0 hotpink, 0 0.5px hotpink, 0.5px 0 hotpink,
     0 -0.5px hotpink;
   text-decoration: none;
+}
+.aboutme-dialogs {
+  white-space: nowrap;
+  font-size: 25px;
+  background-color: #21aeca81;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+  transform: translate(-50%, 0%) !important;
 }

@@ -1,4 +1,4 @@
-import { Vector3 } from "three";
+import { Euler, Vector3 } from "three";
 export const OBJECTS = {
   cat: {
     key: "cat",
@@ -88,19 +88,6 @@ export const accordionData = [
 ];
 
 export const PLANETS = {
-  Me: {
-    title: "Me",
-    key: "p1",
-    model: "models/about-me.glb",
-    text: "Me",
-    textPositionOffset: new Vector3(-0.5, 0, 1.5),
-    textRotationOffset: [0, 0, 0],
-    position: new Vector3(0, 1.5, -5),
-    scale: {
-      mobile: new Vector3(1, 1, 1).multiplyScalar(0.023),
-      desktop: new Vector3(1, 1, 1).multiplyScalar(0.025),
-    },
-  },
   Tech: {
     title: "Tech",
     key: "p2",
