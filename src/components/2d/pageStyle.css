@@ -54,10 +54,10 @@
 }
 @media screen and (max-width: 700px) {
   .hint-img {
-    width: 80vw;
+    width: 60vw;
   }
   .planet-heading {
-    font-size: smaller;
+    font-size: 1.5rem;
   }
 }
 #cards {
@@ -193,9 +193,14 @@ p {
 }
 .aboutme-dialogs {
   white-space: nowrap;
-  font-size: 25px;
+  font-size: 1.4rem;
   background-color: #21aeca81;
   padding: 1rem 0.5rem;
   border-radius: 4px;
   transform: translate(-50%, 0%) !important;
+}
+@media screen and (max-width: 700px) {
+  .aboutme-dialogs {
+    font-size: 1rem;
+  }
 }

@@ -18,8 +18,8 @@ export const CAMERA_PROPS = {
   distance: 4.5,
   draggingSmoothTime: 0.5,
   boundaryEnclosesCamera: true,
-  azimuthRotateSpeed: -1.3,
-  polarRotateSpeed: -1.3,
+  azimuthRotateSpeed: -1,
+  polarRotateSpeed: -1,
 };
 export const HINTS = {
   Drag: {

@@ -73,10 +73,16 @@ export default function AboutMePlanet() {
         } else if (normalizedAzimuthAngle > 2) {
           setDialog(`I have had experience in <b>Game Development</b>`);
         } else if (normalizedAzimuthAngle > 1) {
-          setDialog(
-            `I love taking a concept or an idea and transforming it into a <br/>
+          if (isMobile)
+            setDialog(
+              `I love taking a concept and <br/> transforming it into a
+            tangible creation<br/> that can be experienced and enjoyed.`
+            );
+          else
+            setDialog(
+              `I love taking a concept or an idea and transforming it into a <br/>
             tangible creation that can be experienced and enjoyed.`
-          );
+            );
         } else {
           setDialog(`Hi, I am Ritobrita De and I am a <br />
             <b>
@@ -95,22 +101,19 @@ export default function AboutMePlanet() {
       setSelected(true);
       cameraControlRef?.current?.setTarget(
         Me.position.x,
-        Me.position.y + 1,
+        isMobile ? Me.position.y + 0.75 : Me.position.y + 1,
         Me.position.z,
         true
       );
-      if (isMobile) cameraControlRef?.current?.dollyTo(5, true);
+      if (isMobile) cameraControlRef?.current?.dollyTo(4, true);
       else cameraControlRef?.current?.dollyTo(3.5, true);
       // window.history.replaceState(null, null, `?${name}`);
       cameraControlRef?.current?.rotatePolarTo(Math.PI / 2 + 1, true);
-      //   cameraControlRef?.current?.polarRotateSpeed = 0;
       const ob = { ...cameraControlProps };
-      //   ob.minPolarAngle = Math.PI / 2 + 1;
-      //   ob.maxPolarAngle = Math.PI / 2 + 1;
-      // console.log(Math.PI / 2 + 1);
-      ob.azimuthRotateSpeed = 0.3;
+      ob.azimuthRotateSpeed = 0.4;
       ob.polarRotateSpeed = 0;
-      ob.maxDistance = 6;
+      ob.maxDistance = isMobile ? 4 : 3.5;
+      ob.minDistance = 3;
       setCameraControlProps(ob);
       pref.current.rotation.setFromVector3(new Vector3(0, 1.3, 0));
     }
@@ -214,7 +217,11 @@ export default function AboutMePlanet() {
         <>
           <Html
             position={
-              new Vector3(Me.position.x, Me.position.y + 1, Me.position.z)
+              new Vector3(
+                Me.position.x,
+                isMobile ? Me.position.y + 0.7 : Me.position.y + 1,
+                Me.position.z
+              )
             }
             className="html-ob"
           >
