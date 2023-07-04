@@ -41,7 +41,7 @@ export default function AboutMePlanet() {
   const cameraControlRef = useSceneStore((state) => state.cameraControl);
   const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
   const setCameraControlProps = useSceneStore((s) => s.setCameraControlProps);
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState();
   const [dialog, setDialog] = useState(`Hi, I am Ritobrita De and I am a <br />
   <b>
     <i>Creative Developer</i>
@@ -95,7 +95,7 @@ export default function AboutMePlanet() {
   });
 
   function handlePlanetClick() {
-    // if (typeof selected === "undefined") setShowZoomHint(true);
+    if (typeof selected === "undefined") setShowZoomHint(true);
     if (!selected) {
       console.log("Planet Selected");
       setSelected(true);
@@ -211,7 +211,9 @@ export default function AboutMePlanet() {
             <Penguin />
           </>
         )}
-        {showZoomHint && <Hint type="Zoom" active={showZoomHint} />}
+        {showZoomHint && (
+          <Hint type="Zoom" active={showZoomHint} position={[0, 1, 0]} />
+        )}
       </animated.mesh>
       {selected && (
         <>
