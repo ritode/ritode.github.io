@@ -22,22 +22,12 @@ export default function Art() {
     },
     {
       key: 3,
-      content: (
-        <img
-          src="https://images.unsplash.com/photo-1683897916152-a6cd31a6f8a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2960&q=80"
-          alt="3"
-        />
-      ),
+      content: <img src="https://source.unsplash.com/HbIoSJg5X3E" alt="3" />,
       link: "https://unsplash.com/@ritode",
     },
     {
       key: 4,
-      content: (
-        <img
-          src="https://images.unsplash.com/photo-1683897916147-38dc099e5425?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1381&q=80"
-          alt="4"
-        />
-      ),
+      content: <img src="https://source.unsplash.com/yUQAAwDHgzY" alt="4" />,
       link: "https://unsplash.com/@ritode",
     },
     {
