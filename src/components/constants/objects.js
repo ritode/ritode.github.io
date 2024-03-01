@@ -11,7 +11,7 @@ export const CAMERA_PROPS = {
   autoRotate: true,
   autoRotateSpeed: 0.2,
   minPolarAngle: Math.PI / 2 - 0.1,
-  maxPolarAngle: Math.PI / 2 + 0.4,
+  maxPolarAngle: Math.PI,
   maxDistance: 6,
   minDistance: 2.3,
   target: [0, 1, 0],
@@ -138,6 +138,20 @@ export const PLANETS = {
     scale: {
       mobile: new Vector3(1, 1, 1).multiplyScalar(2.1),
       desktop: new Vector3(1, 1, 1).multiplyScalar(2.3),
+    },
+  },
+  Credits: {
+    title: "Credits",
+    key: "p6",
+    text: "Credits",
+    textPositionOffset: new Vector3(-1.5, 1, 1),
+    textRotationOffset: [1.57, 0, 0.2],
+    model: "models/octopus.glb",
+    position: new Vector3(0, 6, 0),
+    rotation: new Euler(0, 0, 3),
+    scale: {
+      mobile: new Vector3(1, 1, 1).multiplyScalar(0.01),
+      desktop: new Vector3(1, 1, 1).multiplyScalar(0.01),
     },
   },
 };

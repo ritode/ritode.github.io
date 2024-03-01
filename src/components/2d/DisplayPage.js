@@ -3,6 +3,7 @@ import Travel from "./Travel";
 import Projects from "./Projects";
 import WIP from "./WIP";
 import Art from "./Art";
+import Credits from "./Credits";
 
 export default function DisplayPage({ planet }) {
   switch (planet) {
@@ -20,6 +21,9 @@ export default function DisplayPage({ planet }) {
       break;
     case "Travel":
       return <Travel />;
+      break;
+    case "Credits":
+      return <Credits />;
       break;
     default:
       return null;

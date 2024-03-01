@@ -1,0 +1,15 @@
+.credits {
+  width: 50%;
+  height: 80%;
+  overflow: auto;
+  transform: translate(-50%, 0%) !important;
+  /* animation: scrollAnimation 5s linear infinite; */
+}
+@keyframes scrollAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}

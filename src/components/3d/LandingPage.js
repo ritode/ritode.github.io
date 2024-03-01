@@ -38,9 +38,9 @@ export default function LandingPage() {
               </h3>
             </Html>
           </Center>
+          <CatModel />
         </>
       )}
-      <CatModel />
     </>
   );
 }

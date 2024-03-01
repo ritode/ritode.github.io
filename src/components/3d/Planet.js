@@ -116,6 +116,7 @@ export default function Planet({ name }) {
       <primitive
         object={p.scene}
         ref={pref}
+        rotation={PLANETS[name].rotation}
         scale={
           isMobile ? PLANETS[name].scale.mobile : PLANETS[name].scale.desktop
         }
