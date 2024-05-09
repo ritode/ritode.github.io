@@ -33,7 +33,8 @@ export default function CatModel({ scroll }) {
       [0, 0, 0],
       [0, 0, 0],
       [0, Math.PI, 0],
-    ]
+    ],
+    500
   );
 
   useEffect(() => {

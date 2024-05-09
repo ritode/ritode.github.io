@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Euler, MathUtils, Vector3 } from "three";
 
-const useScrollAnimation = (positions, rotations) => {
+const useScrollAnimation = (positions, rotations, increment = 500) => {
   const [scroll, setScroll] = useState(0);
   const scrollRef = useRef(scroll);
 
@@ -18,11 +18,11 @@ const useScrollAnimation = (positions, rotations) => {
 
   const calculateAnimation = (ref) => {
     const index = Math.min(
-      Math.floor(scrollRef.current / 500),
+      Math.floor(scrollRef.current / increment),
       positions.length - 1
     );
     const nextIndex = Math.min(index + 1, positions.length - 1);
-    const lerpAmount = (scrollRef.current % 500) / 500;
+    const lerpAmount = (scrollRef.current % increment) / increment;
 
     if (ref.current && index !== nextIndex) {
       const currentPosition = new Vector3().fromArray(positions[index]);

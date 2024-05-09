@@ -3,13 +3,14 @@ import { Canvas } from "@react-three/fiber";
 import Scene from "./components/3d/Scene";
 import MyEnvironment from "./components/3d/MyEnvironment";
 
-import { Environment } from "@react-three/drei";
+import { Environment, Text3D } from "@react-three/drei";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
 import DayNightToggle from "./components/2d/DayNightToggle";
 import { Stats } from "@react-three/drei";
 import AboutMePlanet from "./components/3d/AboutMePlanet";
 import CatModel from "./components/3d/CatModel";
+import AnimatedText from "./components/3d/AnimatedText";
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
@@ -37,8 +38,21 @@ function App() {
           <Suspense fallback={null}>
             <CatModel scroll={scroll <= 1500 ? scroll : playerScroll} />
           </Suspense>
+          {scroll <= 2000 && (
+            <AnimatedText
+              scroll={scroll}
+              texts={[
+                ["Hello,", "Fellow digital adventurers and code connoisseurs!"],
+                ["I'm Rito,", "A web wizard with a flair for the creative."],
+                [
+                  "Step into my digital playground,",
+                  "Where pixels play and websites come to life!",
+                ],
+              ]}
+            />
+          )}
           <Suspense>
-            <AboutMePlanet />
+            {scroll > 2000 && <AboutMePlanet scroll={scroll} />}
           </Suspense>
         </Canvas>
       </div>
