@@ -1,22 +1,13 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { forwardRef, useRef, useEffect, useState } from "react";
-import { Euler, MathUtils } from "three";
+import { useRef, useEffect, useState } from "react";
+import { MathUtils } from "three";
 import { MeshWobbleMaterial } from "@react-three/drei";
 import { OBJECTS } from "../constants/objects";
-import { Vector3 } from "three";
+import useScrollAnimation from "../../utils/useScrollAnimation";
+
 export default function CatModel({ scroll }) {
   const { nodes, materials } = useGLTF("models/cat-ghost.glb");
-  const positions = [
-    [0, 0, 1],
-    [0, 0, 3],
-    [0, -1.5, 1],
-  ];
-  const rotations = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, Math.PI, 0],
-  ];
   const catRef = useRef(null);
   const catColors = [
     "skyblue",
@@ -32,41 +23,23 @@ export default function CatModel({ scroll }) {
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+  const { calculateAnimation } = useScrollAnimation(
+    [
+      [0, 0, 1],
+      [0, 0, 3],
+      [0, -1.5, 1],
+    ],
+    [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, Math.PI, 0],
+    ]
+  );
+
   useEffect(() => {
-    const incrementSize = 500;
-    const index = Math.min(
-      Math.floor(scroll / incrementSize),
-      positions.length - 1
-    );
-    const nextIndex = Math.min(index + 1, positions.length - 1);
-    // Calculate the lerp amount based on the scrollValue and increment size
-    const lerpAmount = (scroll % incrementSize) / incrementSize;
+    calculateAnimation(catRef);
+  }, [scroll, calculateAnimation]);
 
-    if (catRef.current && index !== nextIndex) {
-      const currentPosition = new Vector3().fromArray(positions[index]);
-      const nextPosition = new Vector3().fromArray(positions[nextIndex]);
-
-      const currentRotation = new Euler().fromArray(rotations[index], "XYZ");
-      const nextRotation = new Euler().fromArray(rotations[nextIndex], "XYZ");
-
-      // Interpolate between the current and next positions
-      const newPosition = new Vector3().lerpVectors(
-        currentPosition,
-        nextPosition,
-        lerpAmount
-      );
-      const newRotation = new Euler(
-        MathUtils.lerp(currentRotation.x, nextRotation.x, lerpAmount),
-        MathUtils.lerp(currentRotation.y, nextRotation.y, lerpAmount),
-        MathUtils.lerp(currentRotation.z, nextRotation.z, lerpAmount),
-        currentRotation.order
-      );
-
-      // Update the mesh position
-      catRef.current.position.copy(newPosition);
-      catRef.current.rotation.copy(newRotation);
-    }
-  }, [scroll]);
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (catRef.current) {

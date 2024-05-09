@@ -8,7 +8,6 @@ import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
 import DayNightToggle from "./components/2d/DayNightToggle";
 import { Stats } from "@react-three/drei";
-import Player from "./components/3d/Player";
 import AboutMePlanet from "./components/3d/AboutMePlanet";
 import CatModel from "./components/3d/CatModel";
 
