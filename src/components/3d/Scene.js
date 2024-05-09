@@ -11,7 +11,7 @@ import { useState } from "react";
 import CatModel from "./CatModel";
 import { useFrame } from "react-three-fiber";
 
-export default function Scene() {
+export default function Scene({ scroll }) {
   const planetSelected = useSceneStore((state) => state.planetSelected);
 
   const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
@@ -26,16 +26,14 @@ export default function Scene() {
 
   return (
     <>
-      <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
-      <MyCameraControls props={cameraControlProps} />
+      {/* <MyCameraControls props={cameraControlProps} /> */}
       <LandingPage />
       <Hint type="Drag" />
-      <AboutMePlanet />
       <DisplayPage planet={planetSelected} />
       {Object.keys(PLANETS).map((key) => (
         <Planet name={key} />
       ))}
-      {showCat && <CatModel />}
+      {/* {showCat && <CatModel />} */}
     </>
   );
 }

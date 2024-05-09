@@ -2,7 +2,7 @@ import { Euler, Vector3 } from "three";
 export const OBJECTS = {
   cat: {
     key: "cat",
-    position: new Vector3(0, -1, 0),
+    position: new Vector3(0, -1.5, 1),
   },
 };
 
