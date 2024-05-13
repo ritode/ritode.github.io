@@ -15,8 +15,9 @@ import Ps5 from "./objects/Ps5";
 import Penguin from "./objects/Penguin";
 import MeOb from "./objects/MeOb";
 import Hint from "./Hints";
+import useScrollAnimation from "../../utils/useScrollAnimation";
 
-export default function AboutMePlanet() {
+export default function AboutMePlanet({ scroll }) {
   const Me = {
     title: "Me",
     key: "p1",
@@ -59,6 +60,23 @@ export default function AboutMePlanet() {
       }
     }
   });
+
+  const { calculateAnimation } = useScrollAnimation(
+    scroll,
+    [
+      [0, 1.5, -8],
+      [0, 1.5, -5],
+      [0, 0, 0],
+      [0, 0, 2],
+      [0, -0.5, 5],
+    ],
+    null,
+    250
+  );
+
+  useEffect(() => {
+    calculateAnimation(scroll, pref);
+  }, [scroll, calculateAnimation]);
 
   useFrame(() => {
     if (selected) {
@@ -137,7 +155,6 @@ export default function AboutMePlanet() {
       true
     );
     cameraControlRef?.current?.dollyTo(4.5, true);
-    // window.history.replaceState(null, null, "/");
   }
 
   useEffect(() => {

@@ -24,21 +24,28 @@ export default function CatModel({ scroll }) {
     return Math.floor(Math.random() * max);
   }
   const { calculateAnimation } = useScrollAnimation(
+    scroll,
     [
+      [0, -1, 0],
       [0, 0, 1],
+      [0, 0, 2],
       [0, 0, 3],
+      [0, 0, 1],
       [0, -1.5, 1],
     ],
     [
       [0, 0, 0],
       [0, 0, 0],
+      [0, 0, 0],
+      [0, Math.PI * 2, 0],
+      [0, Math.PI * 2, 0],
       [0, Math.PI, 0],
     ],
-    500
+    250
   );
 
   useEffect(() => {
-    calculateAnimation(catRef);
+    calculateAnimation(scroll, catRef);
   }, [scroll, calculateAnimation]);
 
   useFrame((state) => {

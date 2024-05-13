@@ -1,4 +1,4 @@
-import { Sparkles, Cloud, Sky } from "@react-three/drei";
+import { Stars, Cloud, Sky } from "@react-three/drei";
 import { isDesktop } from "react-device-detect";
 
 export default function MyEnvironment({ dayMode }) {
@@ -12,7 +12,15 @@ export default function MyEnvironment({ dayMode }) {
       <hemisphereLight intensity={0.2} color="#eaeaea" groundColor="blue" />
       {/* <directionalLight castShadow intensity={0.2} shadow-mapSize={[1024, 1024]} shadow-bias={-0.0001} position={[10, 10, -10]} /> */}
       {isDesktop && !dayMode && (
-        <Sparkles count={100} scale={[20, 20, 10]} size={6} speed={2} />
+        <Stars
+          radius={100}
+          depth={50}
+          count={5000}
+          factor={4}
+          saturation={0}
+          fade
+          speed={1}
+        />
       )}
       {dayMode && (
         <Sky
