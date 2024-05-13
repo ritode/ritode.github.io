@@ -1,4 +1,4 @@
-import { Html, useGLTF, Text3D } from "@react-three/drei";
+import { Html, useGLTF, Text3D, CameraControls } from "@react-three/drei";
 import { useRef, useState, useEffect } from "react";
 import { Euler, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
@@ -15,16 +15,18 @@ import Ps5 from "./objects/Ps5";
 import Penguin from "./objects/Penguin";
 import MeOb from "./objects/MeOb";
 import Hint from "./Hints";
+import "../2d/pageStyle.css";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 
 export default function AboutMePlanet({ scroll }) {
+  const cameraControlRef = useRef(null);
   const Me = {
     title: "Me",
     key: "p1",
     model: "models/about-me.glb",
     text: "Me",
-    textPositionOffset: new Vector3(-0.5, 1, -3.5),
-    textRotationOffset: [0, 0, 0],
+    textPositionOffset: new Vector3(-0.5, 2, -3.5),
+    textRotationOffset: [0.2, 0, 0],
     position: new Vector3(0, 1.5, -5),
     rotation: new Euler(-0.45, 0, 0.65),
     scale: {
@@ -39,9 +41,6 @@ export default function AboutMePlanet({ scroll }) {
   }
 
   const [showZoomHint, setShowZoomHint] = useState(false);
-  const cameraControlRef = useSceneStore((state) => state.cameraControl);
-  const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
-  const setCameraControlProps = useSceneStore((s) => s.setCameraControlProps);
   const [selected, setSelected] = useState();
   const [dialog, setDialog] = useState(`Hi, I am Ritobrita De and I am a <br />
   <b>
@@ -64,11 +63,11 @@ export default function AboutMePlanet({ scroll }) {
   const { calculateAnimation } = useScrollAnimation(
     scroll,
     [
-      [0, 1.5, -8],
+      [0, 1.5, -20],
       [0, 1.5, -5],
       [0, 0, 0],
       [0, 0, 2],
-      [0, -0.5, 5],
+      [0, -2, 5],
     ],
     null,
     250
@@ -118,43 +117,28 @@ export default function AboutMePlanet({ scroll }) {
       console.log("Planet Selected");
       setSelected(true);
       cameraControlRef?.current?.setTarget(
-        Me.position.x,
-        isMobile ? Me.position.y + 0.75 : Me.position.y + 1,
-        Me.position.z,
+        pref.current.position.x,
+        isMobile
+          ? pref.current.position.y + 0.75
+          : pref.current.position.y + 0.5,
+        pref.current.position.z,
         true
       );
       if (isMobile) cameraControlRef?.current?.dollyTo(4, true);
-      else cameraControlRef?.current?.dollyTo(3.5, true);
+      else cameraControlRef?.current?.dollyTo(4.5, true);
       // window.history.replaceState(null, null, `?${name}`);
-      cameraControlRef?.current?.rotatePolarTo(Math.PI / 2 + 1, true);
-      const ob = { ...cameraControlProps };
-      ob.azimuthRotateSpeed = 0.4;
-      ob.polarRotateSpeed = 0;
-      ob.maxDistance = isMobile ? 4 : 3.5;
-      ob.minDistance = 3;
-      setCameraControlProps(ob);
+      cameraControlRef?.current?.rotatePolarTo(1.6, true);
+      // ob.maxDistance = isMobile ? 4 : 3.5;
+      cameraControlRef.current.minDistance = 3;
+      cameraControlRef.current.maxDistance = 5;
+      cameraControlRef.current.polarRotateSpeed = 0;
+      cameraControlRef.current.azimuthRotateSpeed = 0.4;
       pref.current.rotation.setFromVector3(new Vector3(0, 1.3, 0));
     }
   }
   function handlePlanetUnclick() {
-    console.log("Planet UNSelected");
+    cameraControlRef.current.reset();
     setSelected(false);
-    // window.history.replaceState(null, null, `?${name}`);
-    cameraControlRef?.current?.setTarget(0, 1, 0, true);
-    cameraControlRef?.current?.moveTo(0, 0, 0, true);
-    const ob = { ...cameraControlProps };
-    ob.minPolarAngle = CAMERA_PROPS.minPolarAngle;
-    ob.maxPolarAngle = CAMERA_PROPS.maxPolarAngle;
-    ob.azimuthRotateSpeed = CAMERA_PROPS.azimuthRotateSpeed;
-    ob.polarRotateSpeed = CAMERA_PROPS.polarRotateSpeed;
-    ob.maxDistance = CAMERA_PROPS.maxDistance;
-    setCameraControlProps(ob);
-    cameraControlRef?.current?.rotateTo(
-      cameraControlRef?.current.azimuthAngle,
-      1.5,
-      true
-    );
-    cameraControlRef?.current?.dollyTo(4.5, true);
   }
 
   useEffect(() => {
@@ -226,28 +210,29 @@ export default function AboutMePlanet({ scroll }) {
             <Ps5 />
             <RoboModel />
             <Penguin />
+            <Html
+              position={
+                new Vector3(
+                  Me.position.x,
+                  isMobile ? Me.position.y + 0.7 : Me.position.y + 1,
+                  Me.position.z
+                )
+              }
+              className="html-ob"
+            >
+              <h1 className="planet-heading">About Me</h1>
+            </Html>
           </>
         )}
         {showZoomHint && (
           <Hint type="Zoom" active={showZoomHint} position={[0, 1, 0]} />
         )}
       </animated.mesh>
-      {selected && (
-        <>
-          <Html
-            position={
-              new Vector3(
-                Me.position.x,
-                isMobile ? Me.position.y + 0.7 : Me.position.y + 1,
-                Me.position.z
-              )
-            }
-            className="html-ob"
-          >
-            <h1 className="planet-heading">About Me</h1>
-          </Html>
-        </>
-      )}
+      <CameraControls
+        ref={cameraControlRef}
+        enabled={typeof selected === "undefined" ? false : selected}
+        dollySpeed={0}
+      />
     </>
   );
 }
