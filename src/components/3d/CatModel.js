@@ -45,6 +45,7 @@ export default function CatModel({ scroll }) {
   );
 
   useEffect(() => {
+    console.info(scroll, catRef);
     calculateAnimation(scroll, catRef);
   }, [scroll, calculateAnimation]);
 

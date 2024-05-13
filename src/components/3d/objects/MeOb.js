@@ -17,7 +17,7 @@ export default function MeOb() {
   });
   return (
     <mesh position={[-1, 0.88, 0.35]} rotation={[0.5, -1, 0.5]} ref={meRef}>
-      <planeBufferGeometry attach="geometry" args={[0.2, 0.55]} />
+      <planeGeometry attach="geometry" args={[0.2, 0.55]} />
       <meshBasicMaterial
         attach="material"
         map={me}

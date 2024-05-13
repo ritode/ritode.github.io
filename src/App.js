@@ -11,15 +11,26 @@ import CatModel from "./components/3d/CatModel";
 import AnimatedText from "./components/3d/AnimatedText";
 import { Fog } from "three";
 import FloaterAnimals from "./components/3d/objects/FloaterAnimals";
+import ProjectPlanet from "./components/3d/ProjectPlanet";
+import TechPlanet from "./components/3d/TechPlanet";
+import ArtPlanet from "./components/3d/ArtPlanet";
+import TravelPlanet from "./components/3d/TravelPlanet";
+import CreditsPlanet from "./components/3d/CreditsPlanet";
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
   const [scroll, setScroll] = useState(0);
-  const [playerScroll, setPlayerScroll] = useState(0);
-  const [AboutMeScroll, setAboutMeScroll] = useState(0);
+  const [sections, setSections] = useState([
+    { name: "player", start: 0, end: 1500, scroll: 0 },
+    { name: "aboutMe", start: 1500, end: 2500, scroll: 0 },
+    { name: "projects", start: 2500, end: 3500, scroll: 0 },
+    { name: "tech", start: 3500, end: 4500, scroll: 0 },
+    { name: "art", start: 4500, end: 5500, scroll: 0 },
+    { name: "travel", start: 5500, end: 6500, scroll: 0 },
+    { name: "credits", start: 6500, end: 7500, scroll: 0 },
+  ]);
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY);
       setScroll(window.scrollY);
     };
     document.addEventListener("scroll", handleScroll);
@@ -28,8 +39,12 @@ function App() {
     };
   }, []);
   useEffect(() => {
-    if (scroll <= 1500) setPlayerScroll(scroll);
-    if (scroll <= 2500) setAboutMeScroll(scroll - 1500);
+    setSections((prevSections) =>
+      prevSections.map((section) => ({
+        ...section,
+        scroll: scroll - section.start,
+      }))
+    );
   }, [scroll]);
   return (
     <div className="App">
@@ -41,7 +56,9 @@ function App() {
             <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
           </Suspense>
           <Suspense fallback={<LoadingPage />}>
-            <CatModel scroll={scroll <= 1500 ? scroll : playerScroll} />
+            <CatModel
+              scroll={sections.find((s) => s.name === "player")?.scroll}
+            />
           </Suspense>
           {scroll <= 500 && (
             <AnimatedText
@@ -73,7 +90,42 @@ function App() {
           <Suspense>
             {scroll > 1500 && scroll <= 2500 && (
               <AboutMePlanet
-                scroll={scroll <= 2500 ? scroll - 1500 : AboutMeScroll}
+                scroll={sections.find((s) => s.name === "aboutMe")?.scroll}
+              />
+            )}
+          </Suspense>
+          <Suspense>
+            {scroll > 2500 && scroll <= 3500 && (
+              <ProjectPlanet
+                scroll={sections.find((s) => s.name === "projects")?.scroll}
+              />
+            )}
+          </Suspense>
+          <Suspense>
+            {scroll > 3500 && scroll <= 4500 && (
+              <TechPlanet
+                scroll={sections.find((s) => s.name === "tech")?.scroll}
+              />
+            )}
+          </Suspense>
+          <Suspense>
+            {scroll > 4500 && scroll <= 5500 && (
+              <ArtPlanet
+                scroll={sections.find((s) => s.name === "art")?.scroll}
+              />
+            )}
+          </Suspense>
+          <Suspense>
+            {scroll > 5500 && scroll <= 6500 && (
+              <TravelPlanet
+                scroll={sections.find((s) => s.name === "travel")?.scroll}
+              />
+            )}
+          </Suspense>
+          <Suspense>
+            {scroll > 6500 && scroll <= 7500 && (
+              <CreditsPlanet
+                scroll={sections.find((s) => s.name === "credits")?.scroll}
               />
             )}
           </Suspense>

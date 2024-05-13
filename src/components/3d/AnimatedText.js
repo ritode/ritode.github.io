@@ -25,7 +25,7 @@ export default function AnimatedText({ scroll, text }) {
     <Center position={[0, 1, 0]} ref={ref}>
       <mesh>
         {text.map((t, i) => (
-          <Center position={[0, -0.25 * i, 0]}>
+          <Center key={i} position={[0, -0.25 * i, 0]}>
             <Text3D
               key={i}
               font="./fonts/Inter_Bold.json"
