@@ -1,11 +1,10 @@
+import WIP from "../2d/WIP";
 import Planet from "./Planet";
 import { Vector3, Euler } from "three";
 
 export default function TravelPlanet({ scroll }) {
   const p = {
     title: "Travel",
-    textPositionOffset: new Vector3(0.4, 0, 1.3),
-    textRotationOffset: [0, 1.5, 0],
     model: "models/astplan.glb",
     position: new Vector3(-5, 1, -1),
     rotation: new Euler(0, 0, 0),
@@ -27,6 +26,8 @@ export default function TravelPlanet({ scroll }) {
           }
         }
       }}
-    ></Planet>
+    >
+      <WIP />
+    </Planet>
   );
 }

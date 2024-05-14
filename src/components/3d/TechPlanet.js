@@ -1,12 +1,13 @@
 import Planet from "./Planet";
 import { Vector3, Euler } from "three";
+import Accordion from "../2d/Accordion";
+import { Html } from "@react-three/drei";
+import { accordionData } from "../constants/objects";
 
 export default function TechPlanet({ scroll }) {
   const p = {
     title: "Tech",
     model: "models/purple_planet.glb",
-    textPositionOffset: new Vector3(-1.4, -0.25, -0.45),
-    textRotationOffset: [0, -1.3, 0],
     position: new Vector3(5.5, 1, -2),
     rotation: new Euler(0, 0, 0),
     scale: {
@@ -27,6 +28,24 @@ export default function TechPlanet({ scroll }) {
           }
         }
       }}
-    ></Planet>
+      scrollAnimation={[
+        [4, 1.5, -20],
+        [0, 1.5, -5],
+        [0, 0, 0],
+        [2, 0, 2],
+        [0, -2, 5],
+      ]}
+    >
+      <Html position={p.position} className="html-ob">
+        <h1 className="planet-heading">Tech Blogs</h1>
+        <div className="overlay-tech">
+          <div className="accordion">
+            {accordionData.map(({ title, content }) => (
+              <Accordion title={title} content={content} />
+            ))}
+          </div>
+        </div>
+      </Html>
+    </Planet>
   );
 }

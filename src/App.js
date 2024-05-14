@@ -31,7 +31,7 @@ function App() {
   ]);
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY);
+      setScroll(window.scrollY / 2.9);
     };
     document.addEventListener("scroll", handleScroll);
     return () => {

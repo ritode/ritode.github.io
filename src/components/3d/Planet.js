@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { useGLTF, Text3D, CameraControls, Center } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
 import { Vector3 } from "three";
@@ -6,7 +6,19 @@ import { useSpring, animated, config } from "@react-spring/three";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import Hint from "./Hints";
 import { useFrame } from "react-three-fiber";
-export default function Planet({ config, scroll, idleAnimation, children }) {
+export default function Planet({
+  config,
+  scroll,
+  idleAnimation,
+  scrollAnimation = [
+    [0, 1.5, -20],
+    [0, 1.5, -5],
+    [0, 0, 0],
+    [0, 0, 2],
+    [0, -2, 5],
+  ],
+  children,
+}) {
   const [isSelected, setSelected] = useState();
   const [showZoomHint, setShowZoomHint] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -56,13 +68,7 @@ export default function Planet({ config, scroll, idleAnimation, children }) {
   });
   const { calculateAnimation } = useScrollAnimation(
     scroll,
-    [
-      [0, 1.5, -20],
-      [0, 1.5, -5],
-      [0, 0, 0],
-      [0, 0, 2],
-      [0, -2, 5],
-    ],
+    scrollAnimation,
     null,
     250
   );
@@ -81,10 +87,7 @@ export default function Planet({ config, scroll, idleAnimation, children }) {
   return (
     <>
       {!isSelected && (
-        <Center
-          position={config.textPositionOffset}
-          rotation={config.textRotationOffset}
-        >
+        <Center position={[0, 2, -3.5]} rotation={[0.2, 0, 0]}>
           <Text3D
             font="./fonts/Inter_Bold.json"
             curveSegments={32}

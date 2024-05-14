@@ -64,8 +64,6 @@ export default function AboutMePlanet({ scroll }) {
   const Me = {
     title: "Me",
     model: "models/about-me.glb",
-    textPositionOffset: new Vector3(-0.5, 2, -3.5),
-    textRotationOffset: [0.2, 0, 0],
     position: new Vector3(0, 1.5, -5),
     rotation: new Euler(-0.45, 0, 0.65),
     scale: {

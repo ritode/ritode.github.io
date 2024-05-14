@@ -1,11 +1,10 @@
 import Planet from "./Planet";
 import { Vector3, Euler } from "three";
+import Credits from "../2d/Credits.js";
 
 export default function CreditsPlanet({ scroll }) {
   const p = {
     title: "Credits",
-    textPositionOffset: new Vector3(-1.5, 1, 1),
-    textRotationOffset: [1.57, 0, 0.2],
     model: "models/octopus.glb",
     position: new Vector3(-5, 1, -1),
     rotation: new Euler(0, 0, 3),
@@ -26,6 +25,8 @@ export default function CreditsPlanet({ scroll }) {
           // }
         }
       }}
-    ></Planet>
+    >
+      <Credits />
+    </Planet>
   );
 }
