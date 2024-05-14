@@ -10,28 +10,28 @@ import AboutMePlanet from "./components/3d/AboutMePlanet";
 import CatModel from "./components/3d/CatModel";
 import AnimatedText from "./components/3d/AnimatedText";
 import { Fog } from "three";
-import FloaterAnimals from "./components/3d/objects/FloaterAnimals";
 import ProjectPlanet from "./components/3d/ProjectPlanet";
 import TechPlanet from "./components/3d/TechPlanet";
 import ArtPlanet from "./components/3d/ArtPlanet";
 import TravelPlanet from "./components/3d/TravelPlanet";
 import CreditsPlanet from "./components/3d/CreditsPlanet";
+import Scene from "./components/3d/Scene";
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
   const [scroll, setScroll] = useState(0);
   const [sections, setSections] = useState([
-    { name: "player", start: 0, end: 1500, scroll: 0 },
-    { name: "aboutMe", start: 1500, end: 2500, scroll: 0 },
-    { name: "projects", start: 2500, end: 3500, scroll: 0 },
-    { name: "tech", start: 3500, end: 4500, scroll: 0 },
-    { name: "art", start: 4500, end: 5500, scroll: 0 },
-    { name: "travel", start: 5500, end: 6500, scroll: 0 },
-    { name: "credits", start: 6500, end: 7500, scroll: 0 },
+    { name: "player", start: 0, end: 15, scroll: 0 },
+    { name: "aboutMe", start: 15, end: 25, scroll: 0 },
+    { name: "projects", start: 25, end: 35, scroll: 0 },
+    { name: "tech", start: 35, end: 45, scroll: 0 },
+    { name: "art", start: 45, end: 55, scroll: 0 },
+    { name: "travel", start: 55, end: 65, scroll: 0 },
+    { name: "credits", start: 65, end: 75, scroll: 0 },
   ]);
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY / 2.9);
+      setScroll(parseFloat((window.scrollY / 290).toFixed(2)));
     };
     document.addEventListener("scroll", handleScroll);
     return () => {
@@ -60,7 +60,7 @@ function App() {
               scroll={sections.find((s) => s.name === "player")?.scroll}
             />
           </Suspense>
-          {scroll <= 500 && (
+          {scroll <= 5 && (
             <AnimatedText
               scroll={scroll}
               text={[
@@ -69,18 +69,18 @@ function App() {
               ]}
             />
           )}
-          {scroll > 400 && scroll <= 1000 && (
+          {scroll > 4 && scroll <= 10 && (
             <AnimatedText
-              scroll={scroll - 400}
+              scroll={scroll - 4}
               text={[
                 "I'm Rito,",
                 "A web wizard with a flair for the creative.",
               ]}
             />
           )}
-          {scroll > 900 && scroll <= 1500 && (
+          {scroll > 9 && scroll <= 15 && (
             <AnimatedText
-              scroll={scroll - 900}
+              scroll={scroll - 9}
               text={[
                 "Step into my digital playground,",
                 "Where pixels play and websites come to life!",
@@ -88,99 +88,48 @@ function App() {
             />
           )}
           <Suspense>
-            {scroll > 1500 && scroll <= 2500 && (
+            {scroll > 15 && scroll <= 25 && (
               <AboutMePlanet
                 scroll={sections.find((s) => s.name === "aboutMe")?.scroll}
               />
             )}
           </Suspense>
           <Suspense>
-            {scroll > 2500 && scroll <= 3500 && (
+            {scroll > 25 && scroll <= 35 && (
               <ProjectPlanet
                 scroll={sections.find((s) => s.name === "projects")?.scroll}
               />
             )}
           </Suspense>
           <Suspense>
-            {scroll > 3500 && scroll <= 4500 && (
+            {scroll > 35 && scroll <= 45 && (
               <TechPlanet
                 scroll={sections.find((s) => s.name === "tech")?.scroll}
               />
             )}
           </Suspense>
           <Suspense>
-            {scroll > 4500 && scroll <= 5500 && (
+            {scroll > 45 && scroll <= 55 && (
               <ArtPlanet
                 scroll={sections.find((s) => s.name === "art")?.scroll}
               />
             )}
           </Suspense>
           <Suspense>
-            {scroll > 5500 && scroll <= 6500 && (
+            {scroll > 55 && scroll <= 65 && (
               <TravelPlanet
                 scroll={sections.find((s) => s.name === "travel")?.scroll}
               />
             )}
           </Suspense>
           <Suspense>
-            {scroll > 6500 && scroll <= 7500 && (
+            {scroll > 65 && scroll <= 75 && (
               <CreditsPlanet
                 scroll={sections.find((s) => s.name === "credits")?.scroll}
               />
             )}
           </Suspense>
-          <Suspense>
-            {/* {scroll > 1500 && scroll <= 2000 && ( */}
-            <FloaterAnimals
-              obj={"Colobus_Animations.glb"}
-              position={[0.3, 0, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Gecko_Animations.glb"}
-              position={[-0.4, 0.5, 3.5]}
-              rotation={[0, 0.5, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Herring_Animations.glb"}
-              position={[-0.3, 0, 3.5]}
-              rotation={[0, -0.4, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Inkfish_Animations.glb"}
-              position={[0.3, -0.2, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Muskrat_Animations.glb"}
-              position={[0.4, 0.23, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Pudu_Animations.glb"}
-              position={[-0.4, 0.23, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Sparrow_Animations.glb"}
-              position={[0.4, -0.23, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            <FloaterAnimals
-              obj={"Taipan_Animations.glb"}
-              position={[-0.4, -0.3, 3.5]}
-              rotation={[0, 0.2, 0]}
-              // scroll={scroll <= 4000 ? scroll - 2000 : AboutMeScroll}
-            />
-            {/* )} */}
-          </Suspense>
+          <Scene scroll={scroll} />
         </Canvas>
       </div>
       <div className="scroll-element" />

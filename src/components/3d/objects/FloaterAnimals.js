@@ -3,54 +3,41 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { MathUtils } from "three";
 import { useRef, useEffect } from "react";
 import useScrollAnimation from "../../../utils/useScrollAnimation";
-export default function FloaterAnimals({ scroll, position, rotation, obj }) {
+export default function FloaterAnimals({
+  scroll,
+  scrollAnimation,
+  animation,
+  obj,
+}) {
   const obRef = useRef(null);
   const ob = useGLTF(`models/GLTF/${obj}`);
   const { actions } = useAnimations(ob.animations, obRef);
   useEffect(() => {
-    actions?.["Swim"].setEffectiveTimeScale(0.1);
-    actions?.["Swim"].play();
+    actions?.[animation].setEffectiveTimeScale(0.1);
+    actions?.[animation].play();
   });
-  //   const { calculateAnimation } = useScrollAnimation(
-  //     scroll,
-  //     [
-  //       [0, -1, 0],
-  //       [0, 0, 1],
-  //       [0, 0, 2],
-  //       [0, 0, 3],
-  //       [0, 0, 1],
-  //       [0, -1.5, 1],
-  //     ],
-  //     [
-  //       [0, 0, 0],
-  //       [0, 0, 0],
-  //       [0, 0, 0],
-  //       [0, Math.PI * 2, 0],
-  //       [0, Math.PI * 2, 0],
-  //       [0, Math.PI, 0],
-  //     ],
-  //     250
-  //   );
+  const { calculateAnimation } = useScrollAnimation(scroll, scrollAnimation, 2);
 
-  //   useEffect(() => {
-  //     calculateAnimation(scroll, obRef);
-  //   }, [scroll, calculateAnimation]);
+  useEffect(() => {
+    console.log(scroll, obRef);
+    calculateAnimation(scroll, obRef);
+  }, [scroll, calculateAnimation]);
 
-  //   useFrame(({ clock }) => {
-  //     if (obRef.current) {
-  //       const a = clock.getElapsedTime();
-  //       obRef.current.rotation.z = MathUtils.lerp(
-  //         obRef.current.rotation.z,
-  //         Math.sin(a * 2) / 5,
-  //         0.1
-  //       );
-  //     }
-  //   });
+  useFrame(({ clock }) => {
+    if (obRef.current) {
+      const a = clock.getElapsedTime();
+      obRef.current.rotation.z = MathUtils.lerp(
+        obRef.current.rotation.z,
+        Math.sin(a * 2) / 5,
+        0.1
+      );
+    }
+  });
   return (
     <primitive
       object={ob.scene}
-      position={position}
-      rotation={rotation}
+      position={[0, 0, 0]}
+      rotation={[0, 0, 0]}
       scale={[0.1, 0.1, 0.1]}
       ref={obRef}
     />

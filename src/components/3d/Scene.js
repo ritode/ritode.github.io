@@ -1,39 +1,176 @@
-import MyCameraControls from "./myCameraControls";
-import LandingPage from "./LandingPage";
-import { Environment } from "@react-three/drei";
-import Planet from "./Planet";
-import { PLANETS } from "../constants/objects";
-import { useSceneStore } from "../store/sceneStore";
-import Hint from "./Hints";
-import DisplayPage from "../2d/DisplayPage";
-import AboutMePlanet from "../3d/AboutMePlanet";
-import { useState } from "react";
-import CatModel from "./CatModel";
-import { useFrame } from "react-three-fiber";
+import React, { Suspense } from "react";
+import FloaterAnimals from "./objects/FloaterAnimals";
 
 export default function Scene({ scroll }) {
-  const planetSelected = useSceneStore((state) => state.planetSelected);
+  const getComponent = () => {
+    const range = Math.floor(scroll / 10) * 10;
+    const normalizedScroll = scroll % 10;
+    switch (range) {
+      case 0:
+        return (
+          <>
+            <FloaterAnimals
+              obj={"Colobus_Animations.glb"}
+              animation={"Sit"}
+              scroll={normalizedScroll}
+              scrollAnimation={[
+                [
+                  [-4, 1.5, -20],
+                  [0, 1.5, -5],
+                  [0, 0, 0],
+                  [0, 0, 2],
+                  [2, -2, 5],
+                ],
+              ]}
+            />
+            <FloaterAnimals
+              obj={"Sparrow_Animations.glb"}
+              scroll={normalizedScroll}
+              animation={"Fly"}
+              scrollAnimation={[
+                [
+                  [-4, 1.5, -20],
+                  [0, 1.5, -5],
+                  [0, 0, 0],
+                  [0, 0, 2],
+                  [2, -2, 5],
+                ],
+              ]}
+            />
+          </>
+        );
+        // case 10:
+        //   return (
+        //     <>
+        //       <FloaterAnimals
+        //         obj={"Herring_Animations.glb"}
+        //         position={[0.3, 0, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //       <FloaterAnimals
+        //         obj={"Inkfish_Animations.glb"}
+        //         position={[0.4, -0.23, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //     </>
+        //   );
+        // case 20:
+        //   return (
+        //     <>
+        //       <FloaterAnimals
+        //         obj={"Sparrow_Animations.glb"}
+        //         position={[0.3, 0, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //       <FloaterAnimals
+        //         obj={"Pudu_Animations.glb"}
+        //         position={[0.4, -0.23, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //     </>
+        //   );
+        // case 30:
+        //   return (
+        //     <>
+        //       <FloaterAnimals
+        //         obj={"Gecko_Animations.glb"}
+        //         position={[0.3, 0, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //       <FloaterAnimals
+        //         obj={"Muskrat_Animations.glb"}
+        //         position={[0.4, -0.23, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //       <FloaterAnimals
+        //         obj={"Taipan_Animations.glb"}
+        //         position={[0.4, -0.23, 3.5]}
+        //         rotation={[0, 0.2, 0]}
+        //         scroll={normalizedScroll}
+        //       />
+        //     </>
+        //   );
+        // case 40:
+        //   return (
+        //     <FloaterAnimals
+        //       obj={"Taipan_Animations.glb"}
+        //       position={[0.4, -0.23, 3.5]}
+        //       rotation={[0, 0.2, 0]}
+        //       scroll={normalizedScroll}
+        //     />
+        //   );
+        // case 50:
+        //   return (
+        //     <FloaterAnimals
+        //       obj={"Sparrow_Animations.glb"}
+        //       position={[0.4, -0.23, 3.5]}
+        //       rotation={[0, 0.2, 0]}
+        //       scroll={normalizedScroll}
+        //     />
+        //   );
+        // case 60:
+        return (
+          <>
+            <FloaterAnimals
+              obj={"Sparrow_Animations.glb"}
+              position={[0.4, -0.23, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Gecko_Animations.glb"}
+              position={[0.3, 0, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Muskrat_Animations.glb"}
+              position={[0.4, -0.23, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Taipan_Animations.glb"}
+              position={[0.4, -0.23, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Pudu_Animations.glb"}
+              position={[0.4, -0.23, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Herring_Animations.glb"}
+              position={[0.3, 0, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Inkfish_Animations.glb"}
+              position={[0.4, -0.23, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+            <FloaterAnimals
+              obj={"Colobus_Animations.glb"}
+              position={[0.3, 0, 3.5]}
+              rotation={[0, 0.2, 0]}
+              scroll={normalizedScroll}
+            />
+          </>
+        );
+      default:
+        return null;
+    }
+  };
 
-  const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
-  const cameraControl = useSceneStore((s) => s.cameraControl);
-  const [showCat, setShowCat] = useState(true);
-
-  useFrame(() => {
-    if (cameraControl?.current?.polarAngle > Math.PI - 0.1) {
-      setShowCat(false);
-    } else setShowCat(true);
-  });
-
-  return (
-    <>
-      {/* <MyCameraControls props={cameraControlProps} /> */}
-      <LandingPage />
-      <Hint type="Drag" />
-      <DisplayPage planet={planetSelected} />
-      {Object.keys(PLANETS).map((key) => (
-        <Planet name={key} />
-      ))}
-      {/* {showCat && <CatModel />} */}
-    </>
-  );
+  return <Suspense fallback={<></>}>{getComponent()}</Suspense>;
 }

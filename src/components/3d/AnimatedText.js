@@ -15,7 +15,7 @@ export default function AnimatedText({ scroll, text }) {
       [0, 1, 3.5],
     ],
     null,
-    100
+    1
   );
   useEffect(() => {
     calculateAnimation(scroll, ref);

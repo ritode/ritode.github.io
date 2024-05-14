@@ -41,11 +41,10 @@ export default function CatModel({ scroll }) {
       [0, Math.PI * 2, 0],
       [0, Math.PI, 0],
     ],
-    250
+    2.5
   );
 
   useEffect(() => {
-    console.info(scroll, catRef);
     calculateAnimation(scroll, catRef);
   }, [scroll, calculateAnimation]);
 

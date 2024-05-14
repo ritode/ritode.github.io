@@ -70,7 +70,7 @@ export default function Planet({
     scroll,
     scrollAnimation,
     null,
-    250
+    2.5
   );
 
   useEffect(() => {
