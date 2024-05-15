@@ -1,14 +1,19 @@
 .sidebar {
   position: fixed;
-  right: 0;
-  bottom: 50%;
+  left: 48px;
+  bottom: 40%;
   color: #aaa;
 }
 .sidebar .heading {
   margin: 1rem 0;
   cursor: pointer;
-  color: #aaa;
+  color: #fff;
+  display: flex;
+  font-size: 1.5rem;
 }
 .sidebar .heading:hover {
   color: #fff;
+}
+.heading > div:only-child {
+  color: #aaa;
 }

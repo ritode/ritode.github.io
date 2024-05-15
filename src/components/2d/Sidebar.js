@@ -1,47 +1,45 @@
 import { useEffect, useState } from "react";
 import "./sidebar.css";
+
+const sections = [
+  { name: "About Me", scrollStart: 15, scrollEnd: 25, clickIndex: 17 },
+  { name: "Projects", scrollStart: 25, scrollEnd: 35, clickIndex: 27 },
+  { name: "Tech", scrollStart: 35, scrollEnd: 45, clickIndex: 37 },
+  { name: "Art", scrollStart: 45, scrollEnd: 55, clickIndex: 47 },
+  { name: "Travel", scrollStart: 55, scrollEnd: 65, clickIndex: 57 },
+  { name: "Credits", scrollStart: 65, scrollEnd: 75, clickIndex: 67 },
+];
+
 export default function Sidebar({ scroll }) {
   const [visited, setVisited] = useState(false);
+
   useEffect(() => {
     if (scroll > 60) setVisited(true);
   }, [scroll]);
-  const onClick = (s) => {
+
+  const onClick = (index) => {
     window.scrollTo({
-      top: s * 290,
-      behavior: "smooth", // You can also use 'auto' for instant scrolling
+      top: index * 290,
+      behavior: "smooth",
     });
   };
+
   return (
     <div className="sidebar">
-      {(scroll > 15 || visited) && (
-        <div className="heading" onClick={() => onClick(17)}>
-          About Me
-        </div>
-      )}
-      {(scroll > 25 || visited) && (
-        <div className="heading" onClick={() => onClick(27)}>
-          Projects
-        </div>
-      )}
-      {(scroll > 35 || visited) && (
-        <div className="heading" onClick={() => onClick(37)}>
-          Tech
-        </div>
-      )}
-      {(scroll > 45 || visited) && (
-        <div className="heading" onClick={() => onClick(47)}>
-          Art
-        </div>
-      )}
-      {(scroll > 55 || visited) && (
-        <div className="heading" onClick={() => onClick(57)}>
-          Travel
-        </div>
-      )}
-      {(scroll > 65 || visited) && (
-        <div className="heading" onClick={() => onClick(67)}>
-          Credits
-        </div>
+      {sections.map(
+        ({ name, scrollStart, scrollEnd, clickIndex }) =>
+          (scroll > scrollStart || visited) && (
+            <div
+              key={name}
+              className="heading"
+              onClick={() => onClick(clickIndex)}
+            >
+              {scroll > scrollStart && scroll < scrollEnd && (
+                <div>--> &nbsp;</div>
+              )}
+              <div>{name}</div>
+            </div>
+          )
       )}
     </div>
   );
