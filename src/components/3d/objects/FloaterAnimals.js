@@ -4,43 +4,34 @@ import { MathUtils } from "three";
 import { useRef, useEffect } from "react";
 import useScrollAnimation from "../../../utils/useScrollAnimation";
 export default function FloaterAnimals({
-  scroll,
-  scrollAnimation,
+  positions,
   animation,
   obj,
+  scale,
+  rotations,
 }) {
   const obRef = useRef(null);
   const ob = useGLTF(`models/GLTF/${obj}`);
   const { actions } = useAnimations(ob.animations, obRef);
   useEffect(() => {
-    actions?.[animation].setEffectiveTimeScale(0.1);
-    actions?.[animation].play();
-  });
-  const { calculateAnimation } = useScrollAnimation(scroll, scrollAnimation, 2);
-
-  useEffect(() => {
-    console.log(scroll, obRef);
-    calculateAnimation(scroll, obRef);
-  }, [scroll, calculateAnimation]);
-
-  useFrame(({ clock }) => {
-    if (obRef.current) {
-      const a = clock.getElapsedTime();
-      obRef.current.rotation.z = MathUtils.lerp(
-        obRef.current.rotation.z,
-        Math.sin(a * 2) / 5,
-        0.1
-      );
+    if (animation) {
+      actions?.[animation].setEffectiveTimeScale(0.2);
+      actions?.[animation].play();
     }
   });
+
   return (
-    <primitive
-      object={ob.scene}
-      position={[0, 0, 0]}
-      rotation={[0, 0, 0]}
-      scale={[0.1, 0.1, 0.1]}
-      ref={obRef}
-    />
+    <>
+      {positions.map((pos, i) => (
+        <primitive
+          object={ob.scene}
+          scale={Array(3).fill(scale)}
+          ref={obRef}
+          position={positions[i]}
+          rotation={rotations[i]}
+        />
+      ))}
+    </>
   );
 }
 

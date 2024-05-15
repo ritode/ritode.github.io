@@ -2,7 +2,7 @@ import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import MyEnvironment from "./components/3d/MyEnvironment";
 
-import { Environment } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
 import DayNightToggle from "./components/2d/DayNightToggle";
@@ -16,6 +16,18 @@ import ArtPlanet from "./components/3d/ArtPlanet";
 import TravelPlanet from "./components/3d/TravelPlanet";
 import CreditsPlanet from "./components/3d/CreditsPlanet";
 import Scene from "./components/3d/Scene";
+
+function Asteroids({ position, rotation, scale }) {
+  const ob = useGLTF("models/asteroids.glb");
+  return (
+    <primitive
+      object={ob.scene}
+      scale={Array(3).fill(scale)}
+      position={position}
+      rotation={rotation}
+    />
+  );
+}
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
@@ -50,7 +62,7 @@ function App() {
     <div className="App">
       <DayNightToggle dayMode={dayMode} setDayMode={setDayMode} />
       <div className="canvas">
-        <Canvas shadows camera={{ fov: 45 }} fog={new Fog("#000", -10, 1000)}>
+        <Canvas shadows camera={{ fov: 45 }} fog={new Fog("#000", 5, 1000)}>
           <MyEnvironment dayMode={dayMode} />
           <Suspense fallback={<LoadingPage />}>
             <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
@@ -63,6 +75,14 @@ function App() {
           {scroll <= 5 && (
             <AnimatedText
               scroll={scroll}
+              scrollAnimation={[
+                [0, 1, 0],
+                [0, 1, 0],
+                [0, 1, 0],
+                [0, 1, 1],
+                [0, 1, 2],
+                [0, 1, 3.5],
+              ]}
               text={[
                 "Hello,",
                 "Fellow digital adventurers and code connoisseurs!",
@@ -129,7 +149,13 @@ function App() {
               />
             )}
           </Suspense>
-          <Scene scroll={scroll} />
+          {scroll < 15 && <Scene scroll={scroll} />}
+          {/* <Asteroid position={[, 0, 0]} rotation={[0, 0, 0]} scale={0.5} />
+          <Asteroids
+            position={[-2, 2, -3]}
+            rotation={[0.5, -1, -0.2]}
+            scale={0.05}
+          /> */}
         </Canvas>
       </div>
       <div className="scroll-element" />

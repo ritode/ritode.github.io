@@ -23,7 +23,8 @@ export default function AboutMePlanet({ scroll }) {
     );
     return MathUtils.euclideanModulo(azimuthAngle, Math.PI * 2);
   }
-  const [dialog, setDialog] = useState(`Hi, I am Ritobrita De and I am a <br />
+  const [dialog, setDialog] = useState(`Hi again! <br />
+  I like to call myself a
   <b>
     <i>Creative Developer</i>
   </b>
@@ -52,11 +53,12 @@ export default function AboutMePlanet({ scroll }) {
             tangible creation that can be experienced and enjoyed.`
           );
       } else {
-        setDialog(`Hi, I am Ritobrita De and I am a <br />
-            <b>
-              <i>Creative Developer</i>
-            </b>
-            .`);
+        setDialog(`Hi again! <br />
+        I like to call myself a
+        <b>
+          <i>Creative Developer</i>
+        </b>
+        .`);
       }
     }
   });

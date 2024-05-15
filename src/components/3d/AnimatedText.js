@@ -2,18 +2,22 @@ import { Center, Text3D } from "@react-three/drei";
 import { useRef, useState } from "react";
 import { useEffect } from "react";
 import useScrollAnimation from "../../utils/useScrollAnimation";
-export default function AnimatedText({ scroll, text }) {
+export default function AnimatedText({
+  scroll,
+  text,
+  scrollAnimation = [
+    [0, 2, -10],
+    [0, 1, -4],
+    [0, 1, -2],
+    [0, 1, 1],
+    [0, 1, 2],
+    [0, 1, 3.5],
+  ],
+}) {
   const ref = useRef(null);
   const { calculateAnimation } = useScrollAnimation(
     scroll,
-    [
-      [0, 2, -10],
-      [0, 1, -4],
-      [0, 1, -2],
-      [0, 1, 1],
-      [0, 1, 2],
-      [0, 1, 3.5],
-    ],
+    scrollAnimation,
     null,
     1
   );
