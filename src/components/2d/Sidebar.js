@@ -11,10 +11,22 @@ const sections = [
 ];
 
 export default function Sidebar({ scroll }) {
-  const [visited, setVisited] = useState(false);
+  const [visited, setVisited] = useState(
+    sections.reduce((acc, section) => {
+      acc[section.name] = false;
+      return acc;
+    }, {})
+  );
 
   useEffect(() => {
-    if (scroll > 60) setVisited(true);
+    sections.forEach((section) => {
+      if (scroll > section.scrollStart) {
+        setVisited((prevVisited) => ({
+          ...prevVisited,
+          [section.name]: true,
+        }));
+      }
+    });
   }, [scroll]);
 
   const onClick = (index) => {
@@ -28,7 +40,7 @@ export default function Sidebar({ scroll }) {
     <div className="sidebar">
       {sections.map(
         ({ name, scrollStart, scrollEnd, clickIndex }) =>
-          (scroll > scrollStart || visited) && (
+          (scroll > scrollStart || visited[name]) && (
             <div
               key={name}
               className="heading"
