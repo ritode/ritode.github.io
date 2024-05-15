@@ -73,8 +73,9 @@ function App() {
                 [0, 1, 3.5],
               ]}
               text={[
-                "Hello,",
+                "Hello!",
                 "Fellow digital adventurers and code connoisseurs!",
+                "--Scroll below--",
               ]}
             />
           )}
