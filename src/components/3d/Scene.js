@@ -1,41 +1,102 @@
-import MyCameraControls from "./myCameraControls";
-import LandingPage from "./LandingPage";
-import { Environment } from "@react-three/drei";
-import Planet from "./Planet";
-import { PLANETS } from "../constants/objects";
-import { useSceneStore } from "../store/sceneStore";
-import Hint from "./Hints";
-import DisplayPage from "../2d/DisplayPage";
-import AboutMePlanet from "../3d/AboutMePlanet";
-import { useState } from "react";
-import CatModel from "./CatModel";
-import { useFrame } from "react-three-fiber";
+import React, { Suspense, useRef } from "react";
+import FloaterAnimals from "./objects/FloaterAnimals";
+import { MathUtils } from "three";
+import useScrollAnimation from "../../utils/useScrollAnimation";
+import { useEffect } from "react";
+import Asteroid from "./objects/Asteroid";
 
-export default function Scene() {
-  const planetSelected = useSceneStore((state) => state.planetSelected);
-
-  const cameraControlProps = useSceneStore((s) => s.cameraControlProps);
-  const cameraControl = useSceneStore((s) => s.cameraControl);
-  const [showCat, setShowCat] = useState(true);
-
-  useFrame(() => {
-    if (cameraControl?.current?.polarAngle > Math.PI - 0.1) {
-      setShowCat(false);
-    } else setShowCat(true);
-  });
+export default function Scene({ scroll }) {
+  const ref = useRef(null);
+  const { calculateAnimation } = useScrollAnimation(
+    scroll,
+    [
+      [0, 0, -10],
+      [0, 0, -8],
+      [0, 0, -6],
+      [0, 0, -5],
+      [0, 0, -4],
+      [0, 0, -2],
+      [0, 0, 1],
+      [0, 0, 6],
+    ],
+    null,
+    1
+  );
+  useEffect(() => {
+    calculateAnimation(scroll, ref);
+  }, [scroll, calculateAnimation]);
 
   return (
-    <>
-      <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr" />
-      <MyCameraControls props={cameraControlProps} />
-      <LandingPage />
-      <Hint type="Drag" />
-      <AboutMePlanet />
-      <DisplayPage planet={planetSelected} />
-      {Object.keys(PLANETS).map((key) => (
-        <Planet name={key} />
-      ))}
-      {showCat && <CatModel />}
-    </>
+    <Suspense fallback={<></>}>
+      <mesh position={[0, 0, -10]} ref={ref}>
+        <FloaterAnimals
+          obj={"Colobus_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[1.5, -1.2, 12]]}
+          rotations={[[0, -1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Sparrow_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[-1.8, 0.7, 12]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Inkfish_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[-1.8, -1, 6]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Herring_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[-2, -1.3, 6]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Gecko_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[2, 0, 0]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Muskrat_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[1.5, 1, 0]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Pudu_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[-1.3, 0, -6]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <FloaterAnimals
+          obj={"Taipan_Animations.glb"}
+          animation={"Swim"}
+          scale={0.35}
+          positions={[[1.3, 1, -6]]}
+          rotations={[[0.5, 1, 0]]}
+        />
+        <Asteroid
+          scale={0.1}
+          positions={[
+            [-1.3, 1, 10],
+            [-1.8, 0.7, 8],
+          ]}
+          rotations={[
+            [0.5, 1, 0],
+            [0.5, 1, 0],
+          ]}
+        />
+      </mesh>
+    </Suspense>
   );
 }

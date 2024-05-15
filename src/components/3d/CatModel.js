@@ -2,10 +2,11 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useEffect, useState } from "react";
 import { MathUtils } from "three";
-import { useSceneStore } from "../store/sceneStore";
 import { MeshWobbleMaterial } from "@react-three/drei";
 import { OBJECTS } from "../constants/objects";
-export default function CatModel() {
+import useScrollAnimation from "../../utils/useScrollAnimation";
+
+export default function CatModel({ scroll }) {
   const { nodes, materials } = useGLTF("models/cat-ghost.glb");
   const catRef = useRef(null);
   const catColors = [
@@ -22,20 +23,37 @@ export default function CatModel() {
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+  const { calculateAnimation } = useScrollAnimation(
+    scroll,
+    [
+      [0, -1, 0],
+      [0, 0, 1],
+      [0, 0, 2],
+      [0, 0, 3],
+      [0, 0, 1],
+      [0, -1.5, 1],
+    ],
+    [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, Math.PI * 2, 0],
+      [0, Math.PI * 2, 0],
+      [0, Math.PI, 0],
+    ],
+    2.5
+  );
+
   useEffect(() => {
-    useSceneStore.setState({ catGhost: catRef });
-  }, [catRef]);
+    if (catRef.current) calculateAnimation(scroll ?? 0, catRef);
+  }, [scroll, catRef]);
+
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (catRef.current) {
       catRef.current.rotation.x = MathUtils.lerp(
         catRef.current.rotation.x,
         Math.cos(t / 10) / 20,
-        0.1
-      );
-      catRef.current.rotation.y = MathUtils.lerp(
-        catRef.current.rotation.y,
-        Math.sin(t / 10) / 4,
         0.1
       );
       catRef.current.rotation.z = MathUtils.lerp(
@@ -45,7 +63,7 @@ export default function CatModel() {
       );
       catRef.current.position.y = MathUtils.lerp(
         catRef.current.position.y,
-        -Math.sin(t) / 7 - 1,
+        catRef.current.position.y + Math.sin(t) * 0.02, // Wobble range of 0.5 around the current y position
         0.1
       );
     }

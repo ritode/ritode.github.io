@@ -15,10 +15,10 @@
   --white: #fff;
 }
 .day-night-toggle {
-  position: absolute;
-  z-index: 999999999;
-  top: 10px;
-  right: 10px;
+  position: fixed;
+  z-index: 1;
+  right: -10px;
+  scale: 0.6;
 }
 .toggle--checkbox {
   display: none;
