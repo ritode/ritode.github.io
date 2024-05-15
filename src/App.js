@@ -16,18 +16,7 @@ import ArtPlanet from "./components/3d/ArtPlanet";
 import TravelPlanet from "./components/3d/TravelPlanet";
 import CreditsPlanet from "./components/3d/CreditsPlanet";
 import Scene from "./components/3d/Scene";
-
-function Asteroids({ position, rotation, scale }) {
-  const ob = useGLTF("models/asteroids.glb");
-  return (
-    <primitive
-      object={ob.scene}
-      scale={Array(3).fill(scale)}
-      position={position}
-      rotation={rotation}
-    />
-  );
-}
+import Sidebar from "./components/2d/Sidebar";
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
@@ -158,6 +147,7 @@ function App() {
           /> */}
         </Canvas>
       </div>
+      <Sidebar scroll={scroll} />
       <div className="scroll-element" />
     </div>
   );

@@ -24,6 +24,7 @@ export default function FloaterAnimals({
     <>
       {positions.map((pos, i) => (
         <primitive
+          key={i}
           object={ob.scene}
           scale={Array(3).fill(scale)}
           ref={obRef}

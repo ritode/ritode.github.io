@@ -29,6 +29,7 @@ export default function Asteroid({ positions, rotations, scale }) {
     <>
       {positions.map((pos, i) => (
         <primitive
+          key={i}
           object={ob.scene}
           scale={Array(3).fill(scale)}
           ref={obRef}

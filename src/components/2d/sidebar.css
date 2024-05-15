@@ -1,0 +1,14 @@
+.sidebar {
+  position: fixed;
+  right: 0;
+  bottom: 50%;
+  color: #aaa;
+}
+.sidebar .heading {
+  margin: 1rem 0;
+  cursor: pointer;
+  color: #aaa;
+}
+.sidebar .heading:hover {
+  color: #fff;
+}
