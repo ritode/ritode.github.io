@@ -1,6 +1,5 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useRef, useEffect } from "react";
-
 export default function FloaterAnimals({
   positions,
   animation,
