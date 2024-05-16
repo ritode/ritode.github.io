@@ -41,7 +41,7 @@ export default function TechPlanet({ scroll }) {
         <div className="overlay-tech">
           <div className="accordion">
             {accordionData.map(({ title, content }) => (
-              <Accordion title={title} content={content} />
+              <Accordion title={title} content={content} key={title} />
             ))}
           </div>
         </div>

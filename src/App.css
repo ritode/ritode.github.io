@@ -11,7 +11,7 @@
 .scroll-element {
   background-color: none;
   height: 21000px;
-  width: 100px;
+  width: 0.1px;
   overflow: auto;
   position: absolute;
   z-index: 100;

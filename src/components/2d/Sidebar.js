@@ -48,15 +48,15 @@ export default function Sidebar({ scroll }) {
             <div
               key={name}
               className="heading"
-              onClick={() => onClick(clickIndex)}
               style={
                 isMobile ? { fontSize: "0.75rem" } : { fontSize: "1.5rem" }
               }
+              onClick={() => onClick(clickIndex)}
             >
               {scroll > scrollStart && scroll < scrollEnd && (
-                <div>--{">"} &nbsp;</div>
+                <span>--{">"} &nbsp;</span>
               )}
-              <div>{name}</div>
+              <span>{name}</span>
             </div>
           )
       )}

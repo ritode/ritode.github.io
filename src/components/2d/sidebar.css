@@ -8,11 +8,10 @@
   margin: 1rem 0;
   cursor: pointer;
   color: #fff;
-  display: flex;
 }
 .sidebar .heading:hover {
   color: #fff;
 }
-.heading > div:only-child {
+.heading > span:only-child {
   color: #aaa;
 }
