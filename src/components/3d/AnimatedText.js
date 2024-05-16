@@ -1,5 +1,5 @@
 import { Center, Text3D } from "@react-three/drei";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 export default function AnimatedText({

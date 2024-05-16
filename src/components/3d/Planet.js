@@ -1,8 +1,8 @@
-import { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGLTF, Text3D, CameraControls, Center } from "@react-three/drei";
 import { isMobile } from "react-device-detect";
 import { Vector3 } from "three";
-import { useSpring, animated, config } from "@react-spring/three";
+import { useSpring, animated } from "@react-spring/three";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import Hint from "./Hints";
 import { useFrame } from "react-three-fiber";

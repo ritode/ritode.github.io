@@ -1,4 +1,4 @@
-import { Stars, Cloud, Sky } from "@react-three/drei";
+import { Stars, Sky } from "@react-three/drei";
 import { isDesktop } from "react-device-detect";
 
 export default function MyEnvironment({ dayMode }) {

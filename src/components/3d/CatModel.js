@@ -46,7 +46,7 @@ export default function CatModel({ scroll }) {
 
   useEffect(() => {
     if (catRef.current) calculateAnimation(scroll ?? 0, catRef);
-  }, [scroll, catRef]);
+  }, [scroll, catRef, calculateAnimation]);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();

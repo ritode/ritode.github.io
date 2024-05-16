@@ -2,7 +2,7 @@ import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import MyEnvironment from "./components/3d/MyEnvironment";
 
-import { Environment, useGLTF } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
 import DayNightToggle from "./components/2d/DayNightToggle";
