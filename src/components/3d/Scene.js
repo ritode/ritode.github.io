@@ -1,6 +1,5 @@
 import React, { Suspense, useRef } from "react";
 import FloaterAnimals from "./objects/FloaterAnimals";
-import { MathUtils } from "three";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import { useEffect } from "react";
 import Asteroid from "./objects/Asteroid";

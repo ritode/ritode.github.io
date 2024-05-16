@@ -8,7 +8,7 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (progress == 100) setLoading(false);
+    if (progress === 100) setLoading(false);
   }, [progress]);
 
   return (

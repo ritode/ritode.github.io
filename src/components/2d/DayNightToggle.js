@@ -1,7 +1,8 @@
+import { isMobile } from "react-device-detect";
 import "./DayNightToggle.css";
 export default function DayNightToggle({ dayMode, setDayMode }) {
   return (
-    <div className="day-night-toggle">
+    <div className="day-night-toggle" style={{ transform: "scale(0.6)" }}>
       <input
         type="checkbox"
         id="toggle"

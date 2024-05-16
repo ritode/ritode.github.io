@@ -1,8 +1,7 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import MyEnvironment from "./components/3d/MyEnvironment";
-
-import { Environment, useGLTF } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
 import DayNightToggle from "./components/2d/DayNightToggle";
@@ -17,6 +16,7 @@ import TravelPlanet from "./components/3d/TravelPlanet";
 import CreditsPlanet from "./components/3d/CreditsPlanet";
 import Scene from "./components/3d/Scene";
 import Sidebar from "./components/2d/Sidebar";
+import { isMobile } from "react-device-detect";
 
 function App() {
   const [dayMode, setDayMode] = useState(false);
@@ -72,19 +72,34 @@ function App() {
                 [0, 1, 2],
                 [0, 1, 3.5],
               ]}
-              text={[
-                "Hello,",
-                "Fellow digital adventurers and code connoisseurs!",
-              ]}
+              text={
+                isMobile
+                  ? [
+                      "Hello!",
+                      "Fellow digital adventurers and ",
+                      "Code connoisseurs!",
+                      "--Scroll below--",
+                    ]
+                  : [
+                      "Hello!",
+                      "Fellow digital adventurers and code connoisseurs!",
+                      "--Scroll below--",
+                    ]
+              }
             />
           )}
           {scroll > 4 && scroll <= 10 && (
             <AnimatedText
               scroll={scroll - 4}
-              text={[
-                "I'm Rito,",
-                "A web wizard with a flair for the creative.",
-              ]}
+              text={
+                isMobile
+                  ? [
+                      "I'm Rito,",
+                      "A web wizard with a ",
+                      "flair for the creative.",
+                    ]
+                  : ["I'm Rito,", "A web wizard with a flair for the creative."]
+              }
             />
           )}
           {scroll > 9 && scroll <= 15 && (

@@ -1,8 +1,6 @@
-import { useFrame } from "react-three-fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { MathUtils } from "three";
 import { useRef, useEffect } from "react";
-import useScrollAnimation from "../../../utils/useScrollAnimation";
+
 export default function FloaterAnimals({
   positions,
   animation,

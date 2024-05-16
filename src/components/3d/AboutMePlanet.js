@@ -5,7 +5,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { isMobile } from "react-device-detect";
 import { MathUtils } from "three";
 import RoboModel from "./RoboModel";
-import GameboyModel from "./GameboyModel";
 import Arrow from "./objects/Arrow";
 import Rock from "./objects/Rock";
 import Ps5 from "./objects/Ps5";
