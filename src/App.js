@@ -1,6 +1,7 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import MyEnvironment from "./components/3d/MyEnvironment";
+
 import { Environment } from "@react-three/drei";
 import LoadingPage from "./components/3d/LandingPage";
 import { Suspense, useState, useEffect } from "react";
