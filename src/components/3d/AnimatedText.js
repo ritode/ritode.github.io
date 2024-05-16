@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import { isMobile } from "react-device-detect";
+
 export default function AnimatedText({
   scroll,
   text,

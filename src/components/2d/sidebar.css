@@ -9,6 +9,7 @@
   cursor: pointer;
   color: #fff;
   display: flex;
+  font-size: 1.5rem;
 }
 .sidebar .heading:hover {
   color: #fff;
