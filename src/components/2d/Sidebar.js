@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./sidebar.css";
+import { isMobile } from "react-device-detect";
 
 const sections = [
   { name: "About Me", scrollStart: 15, scrollEnd: 25, clickIndex: 17 },
@@ -37,7 +38,10 @@ export default function Sidebar({ scroll }) {
   };
 
   return (
-    <div className="sidebar">
+    <div
+      className="sidebar"
+      style={isMobile ? { left: "0.75rem" } : { left: "1.5rem" }}
+    >
       {sections.map(
         ({ name, scrollStart, scrollEnd, clickIndex }) =>
           (scroll > scrollStart || visited[name]) && (
@@ -45,9 +49,12 @@ export default function Sidebar({ scroll }) {
               key={name}
               className="heading"
               onClick={() => onClick(clickIndex)}
+              style={
+                isMobile ? { fontSize: "0.75rem" } : { fontSize: "1.5rem" }
+              }
             >
               {scroll > scrollStart && scroll < scrollEnd && (
-                <div>--> &nbsp;</div>
+                <div>--{">"} &nbsp;</div>
               )}
               <div>{name}</div>
             </div>

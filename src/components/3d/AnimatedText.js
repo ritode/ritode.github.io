@@ -2,6 +2,7 @@ import { Center, Text3D } from "@react-three/drei";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useScrollAnimation from "../../utils/useScrollAnimation";
+import { isMobile } from "react-device-detect";
 export default function AnimatedText({
   scroll,
   text,
@@ -38,9 +39,9 @@ export default function AnimatedText({
               bevelSize={0.01}
               bevelThickness={0}
               height={0.5}
-              lineHeight={0.7}
+              lineHeight={isMobile ? 0.5 : 0.7}
               letterSpacing={0.03}
-              size={0.5}
+              size={isMobile ? 0.35 : 0.5}
               scale={[0.2, 0.2, 0.05]}
             >
               {t}

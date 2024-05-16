@@ -17,8 +17,7 @@
 .day-night-toggle {
   position: fixed;
   z-index: 1;
-  right: -10px;
-  scale: 0.6;
+  right: -8px;
 }
 .toggle--checkbox {
   display: none;
