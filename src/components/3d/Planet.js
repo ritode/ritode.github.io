@@ -120,16 +120,15 @@ export default function Planet({
           onClick={() => handlePlanetClick()}
         />
         {isSelected && children}
+        {isSelected && showZoomHint && (
+          <Hint type="Zoom" active={showZoomHint} position={[0, 0.5, 0]} />
+        )}
       </animated.mesh>
       <CameraControls
         ref={cameraControlRef}
         enabled={typeof isSelected === "undefined" ? false : isSelected}
         dollySpeed={0}
       />
-
-      {showZoomHint && (
-        <Hint type="Zoom" active={showZoomHint} position={[0, 1, 0]} />
-      )}
     </>
   );
 }

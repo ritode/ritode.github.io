@@ -36,7 +36,7 @@ export default function TechPlanet({ scroll }) {
         [0, -2, 5],
       ]}
     >
-      <Html position={p.position} className="html-ob">
+      <Html position={[0, 0.5, 0]} className="html-ob">
         <h1 className="planet-heading">Tech Blogs</h1>
         <div className="overlay-tech">
           <div className="accordion">

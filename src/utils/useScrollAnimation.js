@@ -2,11 +2,13 @@ import { Euler, MathUtils, Vector3 } from "three";
 
 const useScrollAnimation = (scroll, positions, rotations, increment = 500) => {
   const calculateAnimation = (scroll, ref) => {
-    const index = Math.min(
-      Math.floor(scroll / increment),
-      positions.length - 1
+    const index = Math.max(
+      0,
+      Math.min(Math.floor(scroll / increment), positions.length - 1)
     );
-    const nextIndex = Math.min(index + 1, positions.length - 1);
+
+    const nextIndex = Math.max(0, Math.min(index + 1, positions.length - 1));
+
     const lerpAmount = (scroll % increment) / increment;
     if (ref.current && index !== nextIndex) {
       if (rotations) {

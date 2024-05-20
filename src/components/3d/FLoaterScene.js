@@ -3,8 +3,9 @@ import FloaterAnimals from "./objects/FloaterAnimals";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import { useEffect } from "react";
 import Asteroid from "./objects/Asteroid";
+import LandingPage from "./LandingPage";
 
-export default function Scene({ scroll }) {
+export default function FloaterScene({ scroll }) {
   const ref = useRef(null);
   const { calculateAnimation } = useScrollAnimation(
     scroll,
@@ -26,7 +27,7 @@ export default function Scene({ scroll }) {
   }, [scroll, calculateAnimation]);
 
   return (
-    <Suspense fallback={<></>}>
+    <Suspense fallback={<LandingPage />}>
       <mesh position={[0, 0, -10]} ref={ref}>
         <FloaterAnimals
           obj={"Colobus_Animations.glb"}
