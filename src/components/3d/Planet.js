@@ -6,7 +6,6 @@ import { useSpring, animated } from "@react-spring/three";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 import Hint from "./Hints";
 import { useFrame } from "react-three-fiber";
-import { useCameraControl } from "./CameraControlContext";
 export default function Planet({
   config,
   scroll,
@@ -24,7 +23,7 @@ export default function Planet({
   const [showZoomHint, setShowZoomHint] = useState(false);
   const [hovered, setHovered] = useState(false);
   const pref = useRef();
-  const cameraControlRef = useCameraControl();
+  const cameraControlRef = useRef();
 
   const p = useGLTF(config.model);
 
@@ -54,7 +53,7 @@ export default function Planet({
     }
   }
   function handlePlanetUnclick() {
-    if (cameraControlRef.current) cameraControlRef.current.reset();
+    cameraControlRef.current.reset();
     setSelected(false);
   }
   useEffect(() => {

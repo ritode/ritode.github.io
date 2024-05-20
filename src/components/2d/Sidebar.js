@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./sidebar.css";
 import { isMobile } from "react-device-detect";
-import { useCameraControl } from "../3d/CameraControlContext";
 
 const sections = [
   { name: "About Me", scrollStart: 15, scrollEnd: 25, clickIndex: 17 },
@@ -13,8 +12,6 @@ const sections = [
 ];
 
 export default function Sidebar({ scroll }) {
-  const cameraControlRef = useCameraControl();
-
   const [visited, setVisited] = useState(
     sections.reduce((acc, section) => {
       acc[section.name] = false;
@@ -38,7 +35,6 @@ export default function Sidebar({ scroll }) {
       top: index * 290,
       behavior: "smooth",
     });
-    if (cameraControlRef.current) cameraControlRef.current.reset();
   };
 
   return (
