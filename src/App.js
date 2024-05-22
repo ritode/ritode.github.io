@@ -17,14 +17,64 @@ function App() {
   const [dayMode, setDayMode] = useState(false);
   const [scroll, setScroll] = useState(0);
   useEffect(() => {
+    let startY = 0;
+    let velocity = 0;
+    let lastMoveTime = 0;
+    let animationFrame;
+
     const handleScroll = () => {
-      setScroll(parseFloat((window.scrollY / 290).toFixed(2)));
+      const newScroll = parseFloat((window.scrollY / 290).toFixed(2));
+      setScroll(newScroll);
     };
+
+    const handleTouchStart = (e) => {
+      startY = e.touches[0].pageY;
+      lastMoveTime = Date.now();
+      velocity = 0;
+      cancelAnimationFrame(animationFrame);
+    };
+
+    const handleTouchMove = (e) => {
+      const touchY = e.touches[0].pageY;
+      const diffY = touchY - startY;
+      const now = Date.now();
+      const timeDiff = now - lastMoveTime;
+
+      velocity = diffY / timeDiff;
+      window.scrollTo(0, window.scrollY - diffY * 0.3); // Adjust the scroll sensitivity
+
+      startY = touchY;
+      lastMoveTime = now;
+
+      e.preventDefault();
+    };
+
+    const handleTouchEnd = () => {
+      const inertiaScroll = () => {
+        if (Math.abs(velocity) > 0.1) {
+          window.scrollBy(0, -velocity * 10); // Adjust this value for smoother inertia
+          velocity *= 0.95; // Deceleration factor
+          animationFrame = requestAnimationFrame(inertiaScroll);
+        }
+      };
+
+      animationFrame = requestAnimationFrame(inertiaScroll);
+    };
+
     document.addEventListener("scroll", handleScroll);
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+
     return () => {
       document.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+      cancelAnimationFrame(animationFrame);
     };
   }, []);
+
   return (
     <div className="App">
       <DayNightToggle dayMode={dayMode} setDayMode={setDayMode} />

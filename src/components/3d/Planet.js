@@ -56,7 +56,7 @@ export default function Planet({
     }
   }
   function handlePlanetUnclick() {
-    cameraControlRef.current.reset();
+    cameraControlRef?.current?.reset();
     setPlanetSelected(false);
     setSelected(false);
   }

@@ -1,4 +1,3 @@
-import { isMobile } from "react-device-detect";
 import "./DayNightToggle.css";
 export default function DayNightToggle({ dayMode, setDayMode }) {
   return (

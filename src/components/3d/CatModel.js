@@ -3,7 +3,6 @@ import { useFrame } from "@react-three/fiber";
 import { useRef, useEffect, useState } from "react";
 import { MathUtils } from "three";
 import { MeshWobbleMaterial } from "@react-three/drei";
-import { OBJECTS } from "../constants/objects";
 import useScrollAnimation from "../../utils/useScrollAnimation";
 
 export default function CatModel({ scroll }) {
@@ -47,25 +46,38 @@ export default function CatModel({ scroll }) {
   useEffect(() => {
     if (catRef.current) calculateAnimation(scroll ?? 0, catRef);
   }, [scroll, catRef, calculateAnimation]);
+  const isUpdatingScroll = useRef(false);
 
+  useEffect(() => {
+    isUpdatingScroll.current = true;
+
+    // Simulate the end of scroll updating after some delay
+    const timer = setTimeout(() => {
+      isUpdatingScroll.current = false;
+    }, 100); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, [scroll]);
   useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (catRef.current) {
-      catRef.current.rotation.x = MathUtils.lerp(
-        catRef.current.rotation.x,
-        Math.cos(t / 10) / 20,
-        0.1
-      );
-      catRef.current.rotation.z = MathUtils.lerp(
-        catRef.current.rotation.z,
-        Math.sin(t / 10) / 10,
-        0.1
-      );
-      catRef.current.position.y = MathUtils.lerp(
-        catRef.current.position.y,
-        catRef.current.position.y + Math.sin(t) * 0.02, // Wobble range of 0.5 around the current y position
-        0.1
-      );
+    if (!isUpdatingScroll.current) {
+      const t = state.clock.getElapsedTime();
+      if (catRef.current) {
+        catRef.current.rotation.x = MathUtils.lerp(
+          catRef.current.rotation.x,
+          Math.cos(t / 10) / 20,
+          0.1
+        );
+        catRef.current.rotation.z = MathUtils.lerp(
+          catRef.current.rotation.z,
+          Math.sin(t / 10) / 10,
+          0.1
+        );
+        catRef.current.position.y = MathUtils.lerp(
+          catRef.current.position.y,
+          catRef.current.position.y + Math.sin(t) * 0.02, // Wobble range of 0.5 around the current y position
+          0.1
+        );
+      }
     }
   });
   return (
