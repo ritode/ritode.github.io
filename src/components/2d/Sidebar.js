@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./sidebar.css";
 import { isMobile } from "react-device-detect";
+import { useSceneStore } from "../store/sceneStore";
 
 const sections = [
   { name: "About Me", scrollStart: 15, scrollEnd: 25, clickIndex: 17 },
@@ -12,6 +13,7 @@ const sections = [
 ];
 
 export default function Sidebar({ scroll }) {
+  const planetSelected = useSceneStore((s) => s.planetSelected);
   const [visited, setVisited] = useState(
     sections.reduce((acc, section) => {
       acc[section.name] = false;
@@ -36,30 +38,31 @@ export default function Sidebar({ scroll }) {
       behavior: "smooth",
     });
   };
-
-  return (
-    <div
-      className="sidebar"
-      style={isMobile ? { left: "0.75rem" } : { left: "1.5rem" }}
-    >
-      {sections.map(
-        ({ name, scrollStart, scrollEnd, clickIndex }) =>
-          (scroll > scrollStart || visited[name]) && (
-            <div
-              key={name}
-              className="heading"
-              style={
-                isMobile ? { fontSize: "0.75rem" } : { fontSize: "1.5rem" }
-              }
-              onClick={() => onClick(clickIndex)}
-            >
-              {scroll > scrollStart && scroll < scrollEnd && (
-                <span>--{">"} &nbsp;</span>
-              )}
-              <span>{name}</span>
-            </div>
-          )
-      )}
-    </div>
-  );
+  if (!planetSelected) {
+    return (
+      <div
+        className="sidebar"
+        style={isMobile ? { left: "0.75rem" } : { left: "1.5rem" }}
+      >
+        {sections.map(
+          ({ name, scrollStart, scrollEnd, clickIndex }) =>
+            (scroll > scrollStart || visited[name]) && (
+              <div
+                key={name}
+                className="heading"
+                style={
+                  isMobile ? { fontSize: "0.75rem" } : { fontSize: "1.5rem" }
+                }
+                onClick={() => onClick(clickIndex)}
+              >
+                {scroll > scrollStart && scroll < scrollEnd && (
+                  <span>--{">"} &nbsp;</span>
+                )}
+                <span>{name}</span>
+              </div>
+            )
+        )}
+      </div>
+    );
+  } else return null;
 }

@@ -7,7 +7,7 @@ import CreditsPlanet from "./CreditsPlanet";
 import LandingPage from "./LandingPage";
 import AboutMePlanet from "./AboutMePlanet";
 import CatModel from "./CatModel";
-export default function PlanetScene({ scroll }) {
+export default function PlanetScene({ scroll = 0 }) {
   const [sections, setSections] = useState([
     { name: "player", start: 0, end: 15, scroll: 0 },
     { name: "aboutMe", start: 15, end: 25, scroll: 0 },

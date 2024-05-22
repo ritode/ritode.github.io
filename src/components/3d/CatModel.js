@@ -70,7 +70,7 @@ export default function CatModel({ scroll }) {
   });
   return (
     <group
-      position={OBJECTS.cat.position}
+      position={[0, 0, 0]}
       dispose={null}
       ref={catRef}
       onPointerOver={(e) => setHovered(true)}

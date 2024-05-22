@@ -84,7 +84,7 @@ function App() {
               ]}
             />
           )}
-          {scroll && <PlanetScene scroll={scroll} />}
+          <PlanetScene scroll={scroll} />
           {scroll < 15 && <FloaterScene scroll={scroll} />}
           {/* <Asteroid position={[, 0, 0]} rotation={[0, 0, 0]} scale={0.5} />
           <Asteroids
