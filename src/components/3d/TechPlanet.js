@@ -3,6 +3,7 @@ import { Vector3, Euler } from "three";
 import Accordion from "../2d/Accordion";
 import { Html } from "@react-three/drei";
 import { accordionData } from "../constants/objects";
+import { MathUtils } from "three";
 
 export default function TechPlanet({ scroll }) {
   const p = {
@@ -15,7 +16,30 @@ export default function TechPlanet({ scroll }) {
       desktop: new Vector3(1, 1, 1).multiplyScalar(1.3),
     },
   };
-
+  const scrollAnimation = (pref, delta, scroll) => {
+    const r = scroll.range(0.4, 0.43);
+    const pz = -20 + (6 - -20) * r;
+    pref.current.position.z = MathUtils.damp(
+      pref.current.position.z,
+      pz,
+      2,
+      delta
+    );
+    const py = -2 + (4 - -2) * r;
+    pref.current.position.y = MathUtils.damp(
+      pref.current.position.y,
+      py,
+      2,
+      delta
+    );
+    const px = 5.5 + (-2 - 5.5) * r;
+    pref.current.position.x = MathUtils.damp(
+      pref.current.position.x,
+      px,
+      2,
+      delta
+    );
+  };
   return (
     <Planet
       config={p}
@@ -28,13 +52,7 @@ export default function TechPlanet({ scroll }) {
           }
         }
       }}
-      scrollAnimation={[
-        [4, 1.5, -20],
-        [0, 1.5, -5],
-        [0, 0, 0],
-        [2, 0, 2],
-        [0, -2, 5],
-      ]}
+      scrollAnimation={scrollAnimation}
     >
       <Html position={[0, 0.5, 0]} className="html-ob">
         <h1 className="planet-heading">Tech Blogs</h1>

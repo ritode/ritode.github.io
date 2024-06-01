@@ -1,5 +1,5 @@
 import Planet from "./Planet";
-import { Vector3, Euler } from "three";
+import { Vector3, Euler, MathUtils } from "three";
 import { useState } from "react";
 import { Html } from "@react-three/drei";
 import Carousel from "react-spring-3d-carousel";
@@ -85,7 +85,31 @@ export default function ArtPlanet({ scroll }) {
       },
     };
   });
+  const scrollAnimation = (pref, delta, scroll) => {
+    const r = scroll.range(0.5, 0.53);
+    const p = -20 + (6 - -20) * r;
+    pref.current.position.z = MathUtils.damp(
+      pref.current.position.z,
+      p,
+      2,
+      delta
+    );
 
+    const py = 5 + (-3 - 5) * r;
+    pref.current.position.y = MathUtils.damp(
+      pref.current.position.y,
+      py,
+      2,
+      delta
+    );
+    const px = -5 + (3 - -5) * r;
+    pref.current.position.x = MathUtils.damp(
+      pref.current.position.x,
+      px,
+      2,
+      delta
+    );
+  };
   return (
     <Planet
       config={p}
@@ -97,13 +121,7 @@ export default function ArtPlanet({ scroll }) {
           }
         }
       }}
-      scrollAnimation={[
-        [4, 4, -20],
-        [0, 1.5, -5],
-        [0, 0, 0],
-        [2, 0, 2],
-        [0, -2, 5],
-      ]}
+      scrollAnimation={scrollAnimation}
     >
       <Html position={[0, 0, 0]} className="html-ob">
         <Carousel

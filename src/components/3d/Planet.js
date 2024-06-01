@@ -1,23 +1,21 @@
 import { useRef, useState, useEffect } from "react";
-import { useGLTF, Text3D, CameraControls, Center } from "@react-three/drei";
+import {
+  useGLTF,
+  Text3D,
+  CameraControls,
+  Center,
+  useScroll,
+} from "@react-three/drei";
 import { isMobile } from "react-device-detect";
 import { Vector3 } from "three";
 import { useSpring, animated } from "@react-spring/three";
-import useScrollAnimation from "../../utils/useScrollAnimation";
 import Hint from "./Hints";
 import { useFrame } from "react-three-fiber";
 import { useSceneStore } from "../store/sceneStore";
 export default function Planet({
   config,
-  scroll,
   idleAnimation,
-  scrollAnimation = [
-    [0, 1.5, -20],
-    [0, 1.5, -5],
-    [0, 0, 0],
-    [0, 0, 2],
-    [0, -2, 5],
-  ],
+  scrollAnimation,
   children,
 }) {
   const [isSelected, setSelected] = useState();
@@ -70,45 +68,18 @@ export default function Planet({
       });
     };
   });
-  const { calculateAnimation } = useScrollAnimation(
-    scroll,
-    scrollAnimation,
-    null,
-    2.5
-  );
-
-  useEffect(() => {
-    calculateAnimation(scroll, pref);
-  }, [scroll, calculateAnimation]);
   const { scale } = useSpring({
     scale: hovered && !isSelected ? 1.1 : 1,
     config: config.wobbly,
   });
-  useFrame(() => {
+  const scroll = useScroll();
+  useFrame((state, delta) => {
     idleAnimation(pref, isSelected);
+    scrollAnimation(pref, delta, scroll);
   });
-
+  const planetSelected = useSceneStore((s) => s.planetSelected);
   return (
     <>
-      {!isSelected && (
-        <Center position={[0, 2, -3.5]} rotation={[0.2, 0, 0]}>
-          <Text3D
-            font="./fonts/Inter_Bold.json"
-            curveSegments={32}
-            bevelEnabled
-            bevelSize={0.01}
-            bevelThickness={0}
-            height={0.5}
-            lineHeight={0.7}
-            letterSpacing={0.03}
-            size={0.5}
-            scale={[1, 1, 0.5]}
-          >
-            {config.title}
-            <meshNormalMaterial />
-          </Text3D>
-        </Center>
-      )}
       <animated.mesh
         position={config.position}
         ref={pref}
@@ -127,12 +98,33 @@ export default function Planet({
         {isSelected && showZoomHint && (
           <Hint type="Zoom" active={showZoomHint} position={[0, 0.5, 0]} />
         )}
+        {/* {!isSelected && (
+          <Center rotation={[0.2, 0, 0]} position={[0, 1, 1]}>
+            <Text3D
+              font="./fonts/Inter_Bold.json"
+              curveSegments={32}
+              bevelEnabled
+              bevelSize={0.01}
+              bevelThickness={0}
+              height={0.5}
+              lineHeight={0.7}
+              letterSpacing={0.03}
+              size={0.5}
+              scale={[1, 1, 0.5]}
+            >
+              {config.title}
+              <meshNormalMaterial />
+            </Text3D>
+          </Center>
+        )} */}
       </animated.mesh>
+      {/* {planetSelected && ( */}
       <CameraControls
         ref={cameraControlRef}
         enabled={typeof isSelected === "undefined" ? false : isSelected}
         dollySpeed={0}
       />
+      {/* )} */}
     </>
   );
 }

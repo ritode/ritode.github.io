@@ -1,12 +1,10 @@
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { MathUtils } from "three";
 import { MeshWobbleMaterial } from "@react-three/drei";
-import { OBJECTS } from "../constants/objects";
-import useScrollAnimation from "../../utils/useScrollAnimation";
 
-export default function CatModel({ scroll }) {
+export default function CatModel() {
   const { nodes, materials } = useGLTF("models/cat-ghost.glb");
   const catRef = useRef(null);
   const catColors = [
@@ -23,32 +21,8 @@ export default function CatModel({ scroll }) {
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
-  const { calculateAnimation } = useScrollAnimation(
-    scroll,
-    [
-      [0, -1, 0],
-      [0, 0, 1],
-      [0, 0, 2],
-      [0, 0, 3],
-      [0, 0, 1],
-      [0, -1.5, 1],
-    ],
-    [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, Math.PI * 2, 0],
-      [0, Math.PI * 2, 0],
-      [0, Math.PI, 0],
-    ],
-    2.5
-  );
-
-  useEffect(() => {
-    if (catRef.current) calculateAnimation(scroll ?? 0, catRef);
-  }, [scroll, catRef, calculateAnimation]);
-
-  useFrame((state) => {
+  const scroll = useScroll();
+  useFrame((state, delta) => {
     const t = state.clock.getElapsedTime();
     if (catRef.current) {
       catRef.current.rotation.x = MathUtils.lerp(
@@ -66,11 +40,34 @@ export default function CatModel({ scroll }) {
         catRef.current.position.y + Math.sin(t) * 0.02, // Wobble range of 0.5 around the current y position
         0.1
       );
+      const r1 = scroll.range(0, 0.05);
+      const r2 = scroll.range(0.051, 0.0515);
+      const r3 = scroll.range(0.14, 0.15);
+      const p1 = -2 + (0 - -2) * r1;
+      catRef.current.position.y = MathUtils.damp(
+        catRef.current.position.y,
+        p1,
+        1,
+        delta
+      );
+      const s = 2.5 + (1 - 2.5) * r1;
+      catRef.current.scale.set(s, s, s);
+      const p2 = 0 + (-4 - 0) * r3;
+      catRef.current.position.y = MathUtils.damp(
+        catRef.current.position.y,
+        p2,
+        1,
+        delta
+      );
+      const rotation360 = 2 * Math.PI * r2;
+      const rotation180 = Math.PI * r3;
+
+      catRef.current.rotation.y = rotation360 + rotation180;
     }
   });
   return (
     <group
-      position={[0, 0, 0]}
+      position={[0, -2, 0]}
       dispose={null}
       ref={catRef}
       onPointerOver={(e) => setHovered(true)}

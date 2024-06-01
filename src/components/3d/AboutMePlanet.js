@@ -13,7 +13,7 @@ import MeOb from "./objects/MeOb";
 import "../2d/pageStyle.css";
 import Planet from "./Planet";
 
-export default function AboutMePlanet({ scroll }) {
+export default function AboutMePlanet() {
   const { camera } = useThree();
   function quaternionTonormalizedAzimuthAngle(quaternion) {
     const azimuthAngle = Math.atan2(
@@ -65,18 +65,33 @@ export default function AboutMePlanet({ scroll }) {
   const Me = {
     title: "Me",
     model: "models/about-me.glb",
-    position: new Vector3(0, 1.5, -5),
+    position: new Vector3(0, 1.5, -20),
     rotation: new Euler(-0.45, 0, 0.65),
     scale: {
       mobile: new Vector3(1, 1, 1).multiplyScalar(0.023),
       desktop: new Vector3(1, 1, 1).multiplyScalar(0.025),
     },
   };
+  const scrollAnimation = (pref, delta, scroll) => {
+    const r = scroll.range(0.2, 0.22);
+    const p = -20 + (6 - -20) * r;
+    pref.current.position.z = MathUtils.damp(
+      pref.current.position.z,
+      p,
+      2,
+      delta
+    );
+    pref.current.position.y = MathUtils.damp(
+      pref.current.position.y,
+      2 * r,
+      2,
+      delta
+    );
+  };
 
   return (
     <Planet
       config={Me}
-      scroll={scroll}
       idleAnimation={(pref, selected) => {
         if (pref) {
           if (!selected) {
@@ -85,6 +100,7 @@ export default function AboutMePlanet({ scroll }) {
           }
         }
       }}
+      scrollAnimation={scrollAnimation}
     >
       <Html className="aboutme-dialogs">
         <p dangerouslySetInnerHTML={{ __html: dialog }} />
